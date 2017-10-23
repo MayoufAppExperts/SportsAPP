@@ -1,6 +1,7 @@
 package yalantis.com.sidemenu.util;
 
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,20 +29,18 @@ public class ViewAnimator<T extends Resourceble> {
     private List<T> list;
 
     private List<View> viewList = new ArrayList<>();
-    private ScreenShotable screenShotable;
+    private boolean screenShotable;
     private DrawerLayout drawerLayout;
     private ViewAnimatorListener animatorListener;
 
 
     public ViewAnimator(AppCompatActivity activity,
                         List<T> items,
-                        ScreenShotable screenShotable,
                         final DrawerLayout drawerLayout,
                         ViewAnimatorListener animatorListener) {
         this.appCompatActivity = activity;
 
         this.list = items;
-        this.screenShotable = screenShotable;
         this.drawerLayout = drawerLayout;
         this.animatorListener = animatorListener;
     }
@@ -76,7 +75,6 @@ public class ViewAnimator<T extends Resourceble> {
                         animateView((int) position);
                     }
                     if (position == viewList.size() - 1) {
-                        screenShotable.takeScreenShot();
                         setViewsClickable(true);
                     }
                 }
@@ -170,13 +168,13 @@ public class ViewAnimator<T extends Resourceble> {
     }
 
     private void switchItem(Resourceble slideMenuItem, int topPosition) {
-        this.screenShotable = animatorListener.onSwitch(slideMenuItem, screenShotable, topPosition);
+        this.screenShotable = animatorListener.onSwitch(slideMenuItem, topPosition);
         hideMenuContent();
     }
 
     public interface ViewAnimatorListener {
 
-        public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position);
+        public boolean onSwitch(Resourceble slideMenuItem, int position);
 
         public void disableHomeButton();
 
