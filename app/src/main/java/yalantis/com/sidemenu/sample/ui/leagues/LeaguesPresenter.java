@@ -1,6 +1,8 @@
 package yalantis.com.sidemenu.sample.ui.leagues;
 
 
+import javax.inject.Inject;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -19,6 +21,7 @@ public class LeaguesPresenter
         implements ILeaguesMvpPresenter<V> {
 
 
+    @Inject
     public LeaguesPresenter(DataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(dataManager, schedulerProvider, compositeDisposable);
     }

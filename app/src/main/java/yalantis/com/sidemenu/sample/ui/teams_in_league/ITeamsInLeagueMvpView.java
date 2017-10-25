@@ -1,6 +1,6 @@
 package yalantis.com.sidemenu.sample.ui.teams_in_league;
 
-import yalantis.com.sidemenu.sample.network.model.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.ui.base.MvpView;
 
 /**

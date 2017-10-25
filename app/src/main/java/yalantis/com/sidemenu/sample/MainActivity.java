@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,10 +24,8 @@ import yalantis.com.sidemenu.interfaces.Resourceble;
 import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.sample.fragment.ContentFragment;
 import yalantis.com.sidemenu.sample.fragment.LeaguesFrag;
+import yalantis.com.sidemenu.sample.fragment.LiveScoresFrag;
 import yalantis.com.sidemenu.sample.fragment.MyTeamFrag;
-import yalantis.com.sidemenu.sample.fragment.SecondFragment;
-import yalantis.com.sidemenu.sample.fragment.TeamsInLeaguesFrag;
-import yalantis.com.sidemenu.sample.fragment.ThirdFragment;
 import yalantis.com.sidemenu.util.ViewAnimator;
 
 
@@ -168,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     public boolean onSwitch(Resourceble slideMenuItem, int position) {
         //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        Log.i("Switch", "called");
+        //Log.i("Switch", "called");
         switch (slideMenuItem.getName()) {
             case ContentFragment.BUILDING:
                 Log.d("switch", "second called");
@@ -178,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 replaceFragment(position);
                 return true;
 
-            case ContentFragment.BOOK:
+            case ContentFragment.CASE:
                 Log.d("switch", "third called");
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new LeaguesFrag())
@@ -186,12 +183,13 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 replaceFragment(position);
                 return true;
 
-            case  ContentFragment.CASE:
+            case  ContentFragment.BOOK:
+                Log.d("live", "score");
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new TeamsInLeaguesFrag())
+                        .replace(R.id.content_frame, new LiveScoresFrag())
                         .commit();
                 replaceFragment(position);
-                return true;
+//                return true;
         }
         return false;
 

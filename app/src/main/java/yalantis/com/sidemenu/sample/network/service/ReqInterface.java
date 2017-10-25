@@ -7,7 +7,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import yalantis.com.sidemenu.sample.network.model.API_Constants;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
-import yalantis.com.sidemenu.sample.network.model.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
+import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 
 /**
  * Created by Mohammed on 01/10/2017.
@@ -26,5 +27,8 @@ public interface ReqInterface {
 
     @GET (API_Constants.TEAM_INFO)
     Observable<MyTeamModel> getTeamInfo(@Query("id") String id);
+
+    @GET (API_Constants.LIVE_SCORE)
+    Observable<LiveScores> getLiveScores();
 
 }

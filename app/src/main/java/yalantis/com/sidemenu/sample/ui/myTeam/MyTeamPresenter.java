@@ -1,11 +1,13 @@
 package yalantis.com.sidemenu.sample.ui.myTeam;
 
 
+import android.util.Log;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import yalantis.com.sidemenu.sample.DataManager;
-import yalantis.com.sidemenu.sample.network.model.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.ui.base.BasePresenter;
 import yalantis.com.sidemenu.sample.ui.utils.rx.SchedulerProvider;
 
@@ -33,12 +35,14 @@ public class MyTeamPresenter
                 .subscribe(new Consumer<MyTeamModel>() {
                                @Override
                                public void accept(@NonNull MyTeamModel myTeamModel) throws Exception {
+                                   Log.e("accept", "load");
                                    getMvpView().onFetchMyTeamCompleted(myTeamModel);
                                }
                            },
                         new Consumer<Throwable>() {
                             @Override
                             public void accept(@NonNull Throwable throwable) throws Exception {
+                                Log.e("accept", "error");
                                 getMvpView().onError(throwable.getMessage());
 
                             }

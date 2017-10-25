@@ -1,6 +1,6 @@
 package yalantis.com.sidemenu.sample.network.service;
 
-import yalantis.com.sidemenu.sample.network.model.Team;
+import yalantis.com.sidemenu.sample.network.model.myteam.Team;
 
 /**
  * Created by TheAppExperts on 23/10/2017.

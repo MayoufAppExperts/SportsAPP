@@ -1,4 +1,4 @@
-package yalantis.com.sidemenu.sample.network.model;
+package yalantis.com.sidemenu.sample.network.model.myteam;
 
 /**
  * Created by TheAppExperts on 19/10/2017.

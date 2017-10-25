@@ -1,0 +1,77 @@
+package yalantis.com.sidemenu.sample.fragment;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
+import yalantis.com.sidemenu.sample.AppDataManager;
+import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
+import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
+import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpView;
+import yalantis.com.sidemenu.sample.ui.liveScores.LiveScoresPresenter;
+import yalantis.com.sidemenu.sample.ui.utils.rx.AppSchedulerProvider;
+
+/**
+ * Created by TheAppExperts on 23/10/2017.
+ */
+
+public class LiveScoresFrag extends BaseFragment implements ILiveScoresMvpView {
+
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    LiveScoresPresenter<ILiveScoresMvpView> viewLiveScoresPresenter;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("Class Loaded", "Sports");
+        return inflater.inflate(R.layout.fragment_main, container, false);
+        //return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Log.d("Class Loaded", "Sports");
+        ButterKnife.bind(this, view);
+        initialiseRecyclerView(view);
+
+        viewLiveScoresPresenter = new LiveScoresPresenter<>(
+                new AppDataManager(),
+                new AppSchedulerProvider(),
+                new CompositeDisposable());
+
+        viewLiveScoresPresenter.onAttach(this);
+        viewLiveScoresPresenter.onViewPrepared();
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void initialiseRecyclerView(View view) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        Log.i("Recycler View live", "Initialised True");
+    }
+
+    @Override
+    public void onLiveScoresFetchCompleted(LiveScores liveScores) {
+        //
+        // Log.d("Live Score", liveScores.getTeams().getMatch().get(1).getHomeTeam());
+        recyclerView.setAdapter(new LiveScoreAdapter(liveScores, R.layout.row, getActivity().getApplicationContext()));
+        Log.i("Live Scores", "Completed");
+
+    }
+
+    @Override
+    public void onError(String message) {
+        Log.i("error", message);
+    }
+}

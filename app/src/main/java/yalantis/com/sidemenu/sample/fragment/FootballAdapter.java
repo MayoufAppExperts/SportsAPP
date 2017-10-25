@@ -2,6 +2,7 @@ package yalantis.com.sidemenu.sample.fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.FootballViewH
 
     @Override
     public FootballViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view  = LayoutInflater.from(parent.getContext()).inflate(row, null);
         return new FootballViewHolder(view);
     }

@@ -26,6 +26,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.ui.utils.CommonUtils;
 import yalantis.com.sidemenu.sample.ui.utils.NetworkUtils;
@@ -36,6 +38,7 @@ import yalantis.com.sidemenu.sample.ui.utils.NetworkUtils;
  */
 public abstract class BaseFragment extends Fragment implements MvpView {
     private ProgressDialog mProgressDialog;
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRetainInstance(true);
+        unbinder = ButterKnife.bind(this, view);
     }
 
     @Override
@@ -92,6 +96,12 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.cancel();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override

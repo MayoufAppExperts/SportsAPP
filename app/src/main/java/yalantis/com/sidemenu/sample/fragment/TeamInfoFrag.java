@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import yalantis.com.sidemenu.sample.AppDataManager;
 import yalantis.com.sidemenu.sample.R;
-import yalantis.com.sidemenu.sample.network.model.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
@@ -61,7 +61,7 @@ public class TeamInfoFrag extends BaseFragment implements ITeamInfoMvpView {
 
     @Override
     public void onFetchMyTeamCompleted(MyTeamModel myTeamModel) {
-        recyclerView.setAdapter(new TeamInfoAdapter(myTeamModel, R.layout.row, getActivity().getApplicationContext()));
+        recyclerView.setAdapter(new TeamInfoAdapter(myTeamModel, R.layout.team_info, getActivity().getApplicationContext()));
         Log.i("Fetch", "Completed");
 
     }

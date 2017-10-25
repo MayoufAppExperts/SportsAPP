@@ -1,20 +1,26 @@
 package yalantis.com.sidemenu.sample;
 
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 import yalantis.com.sidemenu.sample.network.ApiHelper;
 import yalantis.com.sidemenu.sample.network.AppApiHelper;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
-import yalantis.com.sidemenu.sample.network.model.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
+import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 
 /**
  * Created by TheAppExperts on 18/10/2017.
  */
-
+@Singleton
 public class AppDataManager implements DataManager {
 
     private ApiHelper apiHelper;
 
+
+    @Inject
     public AppDataManager() {
         this.apiHelper = new AppApiHelper();
     }
@@ -37,5 +43,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<MyTeamModel> useCaseTeamInfo(String id) {
         return apiHelper.useCaseTeamInfo(id);
+    }
+
+    @Override
+    public Observable<LiveScores> useCaseLiveScores() {
+        return apiHelper.useCaseLiveScores();
     }
 }

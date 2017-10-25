@@ -10,10 +10,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.R;
-import yalantis.com.sidemenu.sample.network.model.Country;
-import yalantis.com.sidemenu.sample.network.model.MyTeamModel;
-import yalantis.com.sidemenu.sample.network.model.Team;
-import yalantis.com.sidemenu.sample.network.service.OnItemClickListener;
+import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.myteam.Team;
 import yalantis.com.sidemenu.sample.network.service.OnTeamInfoClickListener;
 
 /**
