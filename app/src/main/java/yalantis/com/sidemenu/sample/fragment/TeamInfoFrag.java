@@ -9,16 +9,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import yalantis.com.sidemenu.sample.AppDataManager;
+import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
+import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
+import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
+import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
 import yalantis.com.sidemenu.sample.ui.utils.rx.AppSchedulerProvider;
+
+import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
 /**
  * Created by TheAppExperts on 23/10/2017.
@@ -28,6 +36,13 @@ public class TeamInfoFrag extends BaseFragment implements ITeamInfoMvpView {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    IActivityComponent iActivityComponent;
+
+    public IActivityComponent getiActivityComponent() {
+        return iActivityComponent;
+    }
+
+    @Inject
     TeamInfoPresenter<ITeamInfoMvpView> mvpViewTeamInfoPresenter;
 
     @Override
@@ -39,18 +54,23 @@ public class TeamInfoFrag extends BaseFragment implements ITeamInfoMvpView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
         initialiseRecyclerView(view);
+        initialiseDagger();
 
         String id = getArguments().getString("id");
-
-        mvpViewTeamInfoPresenter = new TeamInfoPresenter<>(
-                new AppDataManager(),
-                new AppSchedulerProvider(),
-                new CompositeDisposable());
 
         mvpViewTeamInfoPresenter.onAttach(this);
         mvpViewTeamInfoPresenter.onViewPrepared(id);
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void initialiseDagger() {
+        iActivityComponent = DaggerIActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
+                .build();
+
+        getiActivityComponent().inject(this);
     }
 
     private void initialiseRecyclerView(View view) {

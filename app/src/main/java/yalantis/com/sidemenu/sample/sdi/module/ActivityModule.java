@@ -6,9 +6,16 @@ import android.support.v4.app.Fragment;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
+import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpView;
 import yalantis.com.sidemenu.sample.ui.leagues.LeaguesPresenter;
+import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpView;
+import yalantis.com.sidemenu.sample.ui.liveScores.LiveScoresPresenter;
+import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
+import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
 import yalantis.com.sidemenu.sample.ui.utils.rx.AppSchedulerProvider;
 import yalantis.com.sidemenu.sample.ui.utils.rx.SchedulerProvider;
 
@@ -19,15 +26,15 @@ import yalantis.com.sidemenu.sample.ui.utils.rx.SchedulerProvider;
 @Module
 public class ActivityModule {
 
-    Fragment fragment;
+    BaseFragment fragment;
 
-    public ActivityModule(Fragment fragment) {
+    public ActivityModule(BaseFragment fragment) {
         this.fragment = fragment;
     }
 
 
     @Provides
-    Fragment getFragment() {
+    BaseFragment getFragment() {
         return fragment;
     }
 
@@ -45,6 +52,17 @@ public class ActivityModule {
     @Provides
     ILeaguesMvpPresenter<ILeaguesMvpView> iLeaguesMvpViewILeaguesMvpPresenter (LeaguesPresenter<ILeaguesMvpView> leaguesPresenter){
         return leaguesPresenter;
+    }
+
+    @Provides
+    ILiveScoresMvpPresenter<ILiveScoresMvpView> iLiveScoresMvpViewILiveScoresMvpPresenter (LiveScoresPresenter<ILiveScoresMvpView> scoresPresenter){
+        return scoresPresenter;
+    }
+
+    @Provides
+    ITeamInfoMvpPresenter<ITeamInfoMvpView> iTeamInfoMvpViewITeamInfoMvpPresenter(TeamInfoPresenter<ITeamInfoMvpView> teamInfoPresenter){
+        return teamInfoPresenter;
+
     }
 }
 

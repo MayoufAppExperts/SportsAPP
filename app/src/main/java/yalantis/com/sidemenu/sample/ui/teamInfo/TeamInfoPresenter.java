@@ -1,5 +1,7 @@
 package yalantis.com.sidemenu.sample.ui.teamInfo;
 
+import javax.inject.Inject;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -17,7 +19,7 @@ public class TeamInfoPresenter
     extends BasePresenter<V>
     implements ITeamInfoMvpPresenter<V>{
 
-
+    @Inject
     public TeamInfoPresenter(DataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(dataManager, schedulerProvider, compositeDisposable);
     }

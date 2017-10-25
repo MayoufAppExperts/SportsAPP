@@ -1,5 +1,7 @@
 package yalantis.com.sidemenu.sample.ui.liveScores;
 
+import javax.inject.Inject;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -17,10 +19,11 @@ public class LiveScoresPresenter
         extends BasePresenter<V>
         implements ILiveScoresMvpPresenter<V> {
 
-
+    @Inject
     public LiveScoresPresenter(DataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(dataManager, schedulerProvider, compositeDisposable);
     }
+
 
     @Override
     public void onViewPrepared() {
