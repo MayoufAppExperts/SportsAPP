@@ -78,20 +78,20 @@ public class LiveScoresFrag extends BaseFragment implements ILiveScoresMvpView {
     private void initialiseRecyclerView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        Log.i("Recycler View live", "Initialised True");
+        Log.i("blahlive", "Initialised True");
     }
 
     @Override
     public void onLiveScoresFetchCompleted(LiveScores liveScores) {
         //
-        // Log.d("Live Score", liveScores.getTeams().getMatch().get(1).getHomeTeam());
-        recyclerView.setAdapter(new LiveScoreAdapter(liveScores, R.layout.row, getActivity().getApplicationContext()));
+        Log.i("blahblah", liveScores.getTeams().getMatch().get(0).getHomeTeam());
+        //recyclerView.setAdapter(new LiveScoreAdapter(liveScores, R.layout.live_score, getActivity().getApplicationContext()));
         Log.i("Live Scores", "Completed");
 
     }
 
     @Override
     public void onError(String message) {
-        Log.i("error", message);
+        Log.i("errorlive", message);
     }
 }

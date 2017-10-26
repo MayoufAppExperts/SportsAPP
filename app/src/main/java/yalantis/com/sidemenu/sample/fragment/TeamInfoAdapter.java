@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.myteam.Team;
+import yalantis.com.sidemenu.sample.network.model.previousModel.Result;
+import yalantis.com.sidemenu.sample.network.service.OnPreviousFixtureClickListener;
 
 
 class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolder> {
@@ -22,11 +25,14 @@ class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolde
     MyTeamModel myTeamModel;
     int team_info;
     Context applicationContext;
+    OnPreviousFixtureClickListener listener;
+    Result result;
 
-    public TeamInfoAdapter(MyTeamModel myTeamModel, int team_info, Context applicationContext) {
+    public TeamInfoAdapter(MyTeamModel myTeamModel, int team_info, Context applicationContext, OnPreviousFixtureClickListener listener) {
         this.myTeamModel = myTeamModel;
         this.team_info = team_info;
         this.applicationContext = applicationContext;
+        this.listener = listener;
 
     }
 
@@ -52,8 +58,8 @@ class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolde
         }*/
 
         holder.tvYearFormed.setText(
-                (team.getIntFormedYear()==null)?
-                        fillVoid:
+                (team.getIntFormedYear() == null) ?
+                        fillVoid :
                         team.getIntFormedYear()
         );
 
@@ -116,6 +122,8 @@ class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolde
                 .load(myTeamModel.getTeams().get(position).getStrTeamBadge())
                 .resize(500, 500)
                 .into(holder.imgLogo);
+
+        holder.bind(team, listener);
     }
 
     @Override
@@ -145,11 +153,22 @@ class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolde
         TextView tvCountry;
         @BindView(R.id.clubDescr)
         TextView tvDescr;
+        @BindView(R.id.preButton)
+        Button btnPre;
 
 
         public InfoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        public void bind(final Team team, final OnPreviousFixtureClickListener listener) {
+            btnPre.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(team);
+                }
+            });
         }
     }
 }

@@ -17,48 +17,37 @@ import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 class LiveScoreAdapter extends RecyclerView.Adapter<LiveScoreAdapter.LiveScoreHolder> {
 
     LiveScores liveScores;
-    int row;
+    int live_score;
     Context applicationContext;
 
-    public LiveScoreAdapter(LiveScores liveScores, int row, Context applicationContext) {
+    public LiveScoreAdapter(LiveScores liveScores, int live_score, Context applicationContext) {
         this.liveScores = liveScores;
-        this.row = row;
+        this.live_score = live_score;
         this.applicationContext = applicationContext;
     }
 
     @Override
     public LiveScoreHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.i("Adapter", "Live Scores");
-        View view = LayoutInflater.from(parent.getContext()).inflate(row, null);
+        Log.i("scoread", "Live Scores");
+        View view = LayoutInflater.from(parent.getContext()).inflate(live_score, null);
         return new LiveScoreHolder(view);
     }
 
     @Override
     public void onBindViewHolder(LiveScoreHolder holder, int position) {
-        if (liveScores.getTeams().getMatch() != null) {
-            holder.tvName.setText(liveScores.getTeams().getMatch().get(position).getHomeTeam());
-        } else {
-            holder.tvName.setText("No matches");
-        }
-
+        //Log.i("onbindscore", "loaded");
+        holder.tvName.setText(liveScores.getTeams().getMatch().get(0).getHomeTeam());
     }
 
     @Override
     public int getItemCount() {
-        //Log.i("Array size", String.valueOf(liveScores.getTeams().getMatch().size()));
-        int size = 0;
-        if (liveScores.getTeams().getMatch() != null) {
-            size = liveScores.getTeams().getMatch().size();
-        }
-        else {
-            size = 1;
-        }
-        return size;
+        return 1;
+        //return liveScores.getTeams().getMatch().size();
     }
 
     public class LiveScoreHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.clubName)
+        @BindView(R.id.homeTeam)
         TextView tvName;
 
         public LiveScoreHolder(View itemView) {

@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                         .replace(R.id.content_frame, new LiveScoresFrag())
                         .commit();
                 replaceFragment(position);
-//                return true;
+                return true;
         }
         return false;
 

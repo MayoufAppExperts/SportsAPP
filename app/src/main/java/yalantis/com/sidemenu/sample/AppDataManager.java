@@ -10,6 +10,7 @@ import yalantis.com.sidemenu.sample.network.AppApiHelper;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
 
 /**
  * Created by TheAppExperts on 18/10/2017.
@@ -48,5 +49,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<LiveScores> useCaseLiveScores() {
         return apiHelper.useCaseLiveScores();
+    }
+
+    @Override
+    public Observable<PreviousFixtures> useCasePreviousFixtures(String id) {
+        return apiHelper.useCasePreviousFixtures(id);
     }
 }

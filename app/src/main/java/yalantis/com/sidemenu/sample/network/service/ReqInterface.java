@@ -9,6 +9,7 @@ import yalantis.com.sidemenu.sample.network.model.API_Constants;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
+import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
 
 /**
  * Created by Mohammed on 01/10/2017.
@@ -30,5 +31,8 @@ public interface ReqInterface {
 
     @GET (API_Constants.LIVE_SCORE)
     Observable<LiveScores> getLiveScores();
+
+    @GET (API_Constants.PAST_EVENTS)
+    Observable<PreviousFixtures> getPreviousResults(@Query("id") String id);
 
 }

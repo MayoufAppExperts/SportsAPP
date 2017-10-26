@@ -13,6 +13,9 @@ import yalantis.com.sidemenu.sample.ui.leagues.LeaguesPresenter;
 import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpView;
 import yalantis.com.sidemenu.sample.ui.liveScores.LiveScoresPresenter;
+import yalantis.com.sidemenu.sample.ui.previousScores.IPreviousResultMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.previousScores.IPreviousResultMvpView;
+import yalantis.com.sidemenu.sample.ui.previousScores.PreviousResultPresenter;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
@@ -63,6 +66,11 @@ public class ActivityModule {
     ITeamInfoMvpPresenter<ITeamInfoMvpView> iTeamInfoMvpViewITeamInfoMvpPresenter(TeamInfoPresenter<ITeamInfoMvpView> teamInfoPresenter){
         return teamInfoPresenter;
 
+    }
+
+    @Provides
+    IPreviousResultMvpPresenter<IPreviousResultMvpView> iPreviousResultMvpViewIPreviousResultMvpPresenter(PreviousResultPresenter<IPreviousResultMvpView> previousResultPresenter){
+        return previousResultPresenter;
     }
 }
 

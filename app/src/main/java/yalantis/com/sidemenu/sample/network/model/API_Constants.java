@@ -14,4 +14,5 @@ public class API_Constants {
     public static final String LIVE_SCORE = "latestsoccer.php";
     public static final String TEAMS_IN_LEAGUE = "lookup_all_teams.php";
     public static final String TEAM_INFO = "lookupteam.php";
+    public static final String PAST_EVENTS ="eventslast.php";
 }
