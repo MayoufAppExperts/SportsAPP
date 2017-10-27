@@ -6,12 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import javax.inject.Inject;
@@ -41,6 +43,10 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout mySwipeRefreshLayout;
+
     IActivityComponent iActivityComponent;
 
     public IActivityComponent getiActivityComponent() {
@@ -77,6 +83,33 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    private void swipeRefresh(View view) {
+
+        //mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        refreshItems();
+                        Toast.makeText(getActivity().getApplicationContext(), "Refreshed", Toast.LENGTH_LONG);
+                        myUpdateOperation();
+                        initialiseRecyclerView(view);
+                    }
+
+                    public void myUpdateOperation() {
+
+                        mySwipeRefreshLayout.setRefreshing(true);
+                    }
+                });
+    }
+
+    private void refreshItems() {
+        viewLeaguesPresenter.onAttach(this);
+        viewLeaguesPresenter.onViewPrepared();
+
     }
 
     private void initialiseDagger() {

@@ -44,13 +44,13 @@ public class Match {
     private String homeTeam;
     @SerializedName("HomeTeam_Id")
     @Expose
-    private String homeTeamId;
+    private HomeTeamId homeTeamId;
     @SerializedName("AwayTeam")
     @Expose
     private String awayTeam;
     @SerializedName("AwayTeam_Id")
     @Expose
-    private String awayTeamId;
+    private AwayTeamId awayTeamId;
     @SerializedName("Time")
     @Expose
     private String time;
@@ -62,52 +62,52 @@ public class Match {
     private String awayGoals;
     @SerializedName("HomeGoalDetails")
     @Expose
-    private String homeGoalDetails;
+    private HomeGoalDetails homeGoalDetails;
     @SerializedName("AwayGoalDetails")
     @Expose
-    private String awayGoalDetails;
+    private AwayGoalDetails awayGoalDetails;
     @SerializedName("HomeLineupGoalkeeper")
     @Expose
-    private String homeLineupGoalkeeper;
+    private HomeLineupGoalkeeper homeLineupGoalkeeper;
     @SerializedName("AwayLineupGoalkeeper")
     @Expose
-    private String awayLineupGoalkeeper;
+    private AwayLineupGoalkeeper awayLineupGoalkeeper;
     @SerializedName("HomeLineupDefense")
     @Expose
-    private String homeLineupDefense;
+    private HomeLineupDefense homeLineupDefense;
     @SerializedName("AwayLineupDefense")
     @Expose
-    private String awayLineupDefense;
+    private AwayLineupDefense awayLineupDefense;
     @SerializedName("HomeLineupMidfield")
     @Expose
-    private String homeLineupMidfield;
+    private HomeLineupMidfield homeLineupMidfield;
     @SerializedName("AwayLineupMidfield")
     @Expose
-    private String awayLineupMidfield;
+    private AwayLineupMidfield awayLineupMidfield;
     @SerializedName("HomeLineupForward")
     @Expose
-    private String homeLineupForward;
+    private HomeLineupForward homeLineupForward;
     @SerializedName("AwayLineupForward")
     @Expose
-    private String awayLineupForward;
+    private AwayLineupForward awayLineupForward;
     @SerializedName("HomeLineupSubstitutes")
     @Expose
-    private String homeLineupSubstitutes;
+    private HomeLineupSubstitutes homeLineupSubstitutes;
     @SerializedName("AwayLineupSubstitutes")
     @Expose
-    private String awayLineupSubstitutes;
+    private AwayLineupSubstitutes awayLineupSubstitutes;
     @SerializedName("HomeLineupCoach")
     @Expose
-    private String homeLineupCoach;
+    private HomeLineupCoach homeLineupCoach;
     @SerializedName("AwayLineupCoach")
     @Expose
-    private String awayLineupCoach;
+    private AwayLineupCoach awayLineupCoach;
     @SerializedName("HomeSubDetails")
     @Expose
-    private String homeSubDetails;
+    private HomeSubDetails homeSubDetails;
     @SerializedName("AwaySubDetails")
     @Expose
-    private String awaySubDetails;
+    private AwaySubDetails awaySubDetails;
     @SerializedName("HomeTeamFormation")
     @Expose
     private String homeTeamFormation;
@@ -131,7 +131,7 @@ public class Match {
     private String homeTeamRedCardDetails;
     @SerializedName("AwayTeamRedCardDetails")
     @Expose
-    private AwayTeamRedCardDetails awayTeamRedCardDetails;
+    private String awayTeamRedCardDetails;
     @SerializedName("Referee")
     @Expose
     private String referee;
@@ -164,7 +164,12 @@ public class Match {
     }
 
     public Spectators getSpectators() {
+        if (spectators!=null){
         return spectators;
+        }
+        else {
+            return null;
+        }
     }
 
     public void setSpectators(Spectators spectators) {
@@ -179,11 +184,16 @@ public class Match {
         this.homeTeam = homeTeam;
     }
 
-    public String getHomeTeamId() {
-        return homeTeamId;
+    public HomeTeamId getHomeTeamId() {
+        if (homeTeamId != null) {
+            return homeTeamId;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeTeamId(String homeTeamId) {
+    public void setHomeTeamId(HomeTeamId homeTeamId) {
         this.homeTeamId = homeTeamId;
     }
 
@@ -195,11 +205,16 @@ public class Match {
         this.awayTeam = awayTeam;
     }
 
-    public String getAwayTeamId() {
-        return awayTeamId;
+    public AwayTeamId getAwayTeamId() {
+        if (awayTeamId != null) {
+            return awayTeamId;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayTeamId(String awayTeamId) {
+    public void setAwayTeamId(AwayTeamId awayTeamId) {
         this.awayTeamId = awayTeamId;
     }
 
@@ -227,136 +242,221 @@ public class Match {
         this.awayGoals = awayGoals;
     }
 
-    public String getHomeGoalDetails() {
-        return homeGoalDetails;
+    public HomeGoalDetails getHomeGoalDetails() {
+        if (homeGoalDetails != null) {
+            return homeGoalDetails;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeGoalDetails(String homeGoalDetails) {
+    public void setHomeGoalDetails(HomeGoalDetails homeGoalDetails) {
         this.homeGoalDetails = homeGoalDetails;
     }
 
-    public String getAwayGoalDetails() {
-        return awayGoalDetails;
+    public AwayGoalDetails getAwayGoalDetails() {
+        if (awayGoalDetails != null) {
+            return awayGoalDetails;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayGoalDetails(String awayGoalDetails) {
+    public void setAwayGoalDetails(AwayGoalDetails awayGoalDetails) {
         this.awayGoalDetails = awayGoalDetails;
     }
 
-    public String getHomeLineupGoalkeeper() {
-        return homeLineupGoalkeeper;
+    public HomeLineupGoalkeeper getHomeLineupGoalkeeper() {
+        if (homeLineupGoalkeeper != null) {
+            return homeLineupGoalkeeper;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeLineupGoalkeeper(String homeLineupGoalkeeper) {
+    public void setHomeLineupGoalkeeper(HomeLineupGoalkeeper homeLineupGoalkeeper) {
         this.homeLineupGoalkeeper = homeLineupGoalkeeper;
     }
 
-    public String getAwayLineupGoalkeeper() {
-        return awayLineupGoalkeeper;
+    public AwayLineupGoalkeeper getAwayLineupGoalkeeper() {
+        if (awayLineupGoalkeeper != null) {
+            return awayLineupGoalkeeper;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayLineupGoalkeeper(String awayLineupGoalkeeper) {
+    public void setAwayLineupGoalkeeper(AwayLineupGoalkeeper awayLineupGoalkeeper) {
         this.awayLineupGoalkeeper = awayLineupGoalkeeper;
     }
 
-    public String getHomeLineupDefense() {
-        return homeLineupDefense;
+    public HomeLineupDefense getHomeLineupDefense() {
+        if (homeLineupDefense != null) {
+            return homeLineupDefense;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeLineupDefense(String homeLineupDefense) {
+    public void setHomeLineupDefense(HomeLineupDefense homeLineupDefense) {
         this.homeLineupDefense = homeLineupDefense;
     }
 
-    public String getAwayLineupDefense() {
-        return awayLineupDefense;
+    public AwayLineupDefense getAwayLineupDefense() {
+        if (awayLineupDefense != null) {
+            return awayLineupDefense;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayLineupDefense(String awayLineupDefense) {
+    public void setAwayLineupDefense(AwayLineupDefense awayLineupDefense) {
         this.awayLineupDefense = awayLineupDefense;
     }
 
-    public String getHomeLineupMidfield() {
-        return homeLineupMidfield;
+    public HomeLineupMidfield getHomeLineupMidfield() {
+        if (homeLineupMidfield != null) {
+            return homeLineupMidfield;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeLineupMidfield(String homeLineupMidfield) {
+    public void setHomeLineupMidfield(HomeLineupMidfield homeLineupMidfield) {
         this.homeLineupMidfield = homeLineupMidfield;
     }
 
-    public String getAwayLineupMidfield() {
-        return awayLineupMidfield;
+    public AwayLineupMidfield getAwayLineupMidfield() {
+        if (awayLineupMidfield != null) {
+            return awayLineupMidfield;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayLineupMidfield(String awayLineupMidfield) {
+    public void setAwayLineupMidfield(AwayLineupMidfield awayLineupMidfield) {
         this.awayLineupMidfield = awayLineupMidfield;
     }
 
-    public String getHomeLineupForward() {
-        return homeLineupForward;
+    public HomeLineupForward getHomeLineupForward() {
+        if (homeLineupForward != null) {
+            return homeLineupForward;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeLineupForward(String homeLineupForward) {
+    public void setHomeLineupForward(HomeLineupForward homeLineupForward) {
         this.homeLineupForward = homeLineupForward;
     }
 
-    public String getAwayLineupForward() {
-        return awayLineupForward;
+    public AwayLineupForward getAwayLineupForward() {
+        if (awayLineupForward != null) {
+            return awayLineupForward;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayLineupForward(String awayLineupForward) {
+    public void setAwayLineupForward(AwayLineupForward awayLineupForward) {
         this.awayLineupForward = awayLineupForward;
     }
 
-    public String getHomeLineupSubstitutes() {
-        return homeLineupSubstitutes;
+    public HomeLineupSubstitutes getHomeLineupSubstitutes() {
+        if (homeLineupSubstitutes != null) {
+            return homeLineupSubstitutes;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeLineupSubstitutes(String homeLineupSubstitutes) {
+    public void setHomeLineupSubstitutes(HomeLineupSubstitutes homeLineupSubstitutes) {
         this.homeLineupSubstitutes = homeLineupSubstitutes;
     }
 
-    public String getAwayLineupSubstitutes() {
-        return awayLineupSubstitutes;
+    public AwayLineupSubstitutes getAwayLineupSubstitutes() {
+        if (awayLineupSubstitutes != null) {
+            return awayLineupSubstitutes;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayLineupSubstitutes(String awayLineupSubstitutes) {
+    public void setAwayLineupSubstitutes(AwayLineupSubstitutes awayLineupSubstitutes) {
         this.awayLineupSubstitutes = awayLineupSubstitutes;
     }
 
-    public String getHomeLineupCoach() {
-        return homeLineupCoach;
+    public HomeLineupCoach getHomeLineupCoach() {
+        if (homeLineupCoach != null) {
+            return homeLineupCoach;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeLineupCoach(String homeLineupCoach) {
+    public void setHomeLineupCoach(HomeLineupCoach homeLineupCoach) {
         this.homeLineupCoach = homeLineupCoach;
     }
 
-    public String getAwayLineupCoach() {
-        return awayLineupCoach;
+    public AwayLineupCoach getAwayLineupCoach() {
+        if (awayLineupCoach != null) {
+            return awayLineupCoach;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwayLineupCoach(String awayLineupCoach) {
+    public void setAwayLineupCoach(AwayLineupCoach awayLineupCoach) {
         this.awayLineupCoach = awayLineupCoach;
     }
 
-    public String getHomeSubDetails() {
-        return homeSubDetails;
+    public HomeSubDetails getHomeSubDetails() {
+        if (homeSubDetails != null) {
+            return homeSubDetails;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setHomeSubDetails(String homeSubDetails) {
+    public void setHomeSubDetails(HomeSubDetails homeSubDetails) {
         this.homeSubDetails = homeSubDetails;
     }
 
-    public String getAwaySubDetails() {
-        return awaySubDetails;
+    public AwaySubDetails getAwaySubDetails() {
+        if (awaySubDetails != null) {
+            return awaySubDetails;
+        }
+        else {
+            return null;
+        }
     }
 
-    public void setAwaySubDetails(String awaySubDetails) {
+    public void setAwaySubDetails(AwaySubDetails awaySubDetails) {
         this.awaySubDetails = awaySubDetails;
     }
 
     public String getHomeTeamFormation() {
-        return homeTeamFormation;
+        if (homeTeamFormation != null) {
+            return homeTeamFormation;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setHomeTeamFormation(String homeTeamFormation) {
@@ -364,7 +464,12 @@ public class Match {
     }
 
     public String getAwayTeamFormation() {
-        return awayTeamFormation;
+        if (awayTeamFormation!= null) {
+            return awayTeamFormation;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setAwayTeamFormation(String awayTeamFormation) {
@@ -372,7 +477,12 @@ public class Match {
     }
 
     public String getLocation() {
-        return location;
+        if (location != null) {
+            return location;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setLocation(String location) {
@@ -380,7 +490,12 @@ public class Match {
     }
 
     public String getStadium() {
-        return stadium;
+        if (stadium != null) {
+            return stadium;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setStadium(String stadium) {
@@ -388,7 +503,12 @@ public class Match {
     }
 
     public String getHomeTeamYellowCardDetails() {
-        return homeTeamYellowCardDetails;
+        if (homeTeamYellowCardDetails != null) {
+            return homeTeamYellowCardDetails;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setHomeTeamYellowCardDetails(String homeTeamYellowCardDetails) {
@@ -396,7 +516,12 @@ public class Match {
     }
 
     public String getAwayTeamYellowCardDetails() {
-        return awayTeamYellowCardDetails;
+        if (awayTeamYellowCardDetails != null) {
+            return awayTeamYellowCardDetails;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setAwayTeamYellowCardDetails(String awayTeamYellowCardDetails) {
@@ -404,23 +529,39 @@ public class Match {
     }
 
     public String getHomeTeamRedCardDetails() {
-        return homeTeamRedCardDetails;
+        if (homeTeamRedCardDetails != null) {
+            return homeTeamRedCardDetails;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setHomeTeamRedCardDetails(String homeTeamRedCardDetails) {
         this.homeTeamRedCardDetails = homeTeamRedCardDetails;
     }
 
-    public AwayTeamRedCardDetails getAwayTeamRedCardDetails() {
-        return awayTeamRedCardDetails;
+    public String getAwayTeamRedCardDetails() {
+
+        if (awayTeamRedCardDetails != null) {
+            return awayTeamRedCardDetails;
+        }
+        else {
+            return "";
+        }
     }
 
-    public void setAwayTeamRedCardDetails(AwayTeamRedCardDetails awayTeamRedCardDetails) {
+    public void setAwayTeamRedCardDetails(String awayTeamRedCardDetails) {
         this.awayTeamRedCardDetails = awayTeamRedCardDetails;
     }
 
     public String getReferee() {
-        return referee;
+        if (referee != null) {
+            return referee;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setReferee(String referee) {
@@ -428,7 +569,12 @@ public class Match {
     }
 
     public String getHasBeenRescheduled() {
-        return hasBeenRescheduled;
+        if (hasBeenRescheduled != null) {
+            return hasBeenRescheduled;
+        }
+        else {
+            return "";
+        }
     }
 
     public void setHasBeenRescheduled(String hasBeenRescheduled) {

@@ -34,7 +34,7 @@ class PreviousResultAdapter extends RecyclerView.Adapter<PreviousResultAdapter.P
 
     @Override
     public PreViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(parent.getContext()).inflate(live_score, null);
+        View view  = LayoutInflater.from(parent.getContext()).inflate(live_score, parent, false);
         return new PreViewHolder(view);
     }
 
@@ -49,7 +49,7 @@ class PreviousResultAdapter extends RecyclerView.Adapter<PreviousResultAdapter.P
 
     @Override
     public int getItemCount() {
-        Log.i("Previous Fixture count", String.valueOf(previousFixtures.getResults().size()));
+        //Log.i("Previous Fixture count", String.valueOf(previousFixtures.getResults().size()));
         return previousFixtures.getResults().size();
     }
 

@@ -19,6 +19,9 @@ import yalantis.com.sidemenu.sample.ui.previousScores.PreviousResultPresenter;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
+import yalantis.com.sidemenu.sample.ui.upcomingEvents.IUpcomingEventsMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.upcomingEvents.IUpcomingEventsMvpView;
+import yalantis.com.sidemenu.sample.ui.upcomingEvents.UpcomingEventsPresenter;
 import yalantis.com.sidemenu.sample.ui.utils.rx.AppSchedulerProvider;
 import yalantis.com.sidemenu.sample.ui.utils.rx.SchedulerProvider;
 
@@ -71,6 +74,11 @@ public class ActivityModule {
     @Provides
     IPreviousResultMvpPresenter<IPreviousResultMvpView> iPreviousResultMvpViewIPreviousResultMvpPresenter(PreviousResultPresenter<IPreviousResultMvpView> previousResultPresenter){
         return previousResultPresenter;
+    }
+
+    @Provides
+    IUpcomingEventsMvpPresenter<IUpcomingEventsMvpView> iUpcomingEventsMvpViewIUpcomingEventsMvpPresenter(UpcomingEventsPresenter<IUpcomingEventsMvpView> upcomingEventsPresenter){
+        return upcomingEventsPresenter;
     }
 }
 

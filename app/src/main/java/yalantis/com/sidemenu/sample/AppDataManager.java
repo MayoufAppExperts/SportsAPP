@@ -11,6 +11,7 @@ import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
+import yalantis.com.sidemenu.sample.network.model.upcomingEvents.UpcomingEvents;
 
 /**
  * Created by TheAppExperts on 18/10/2017.
@@ -54,5 +55,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<PreviousFixtures> useCasePreviousFixtures(String id) {
         return apiHelper.useCasePreviousFixtures(id);
+    }
+
+    @Override
+    public Observable<UpcomingEvents> useCaseUpcomingEvents(String id) {
+        return apiHelper.useCaseUpcomingEvents(id);
     }
 }

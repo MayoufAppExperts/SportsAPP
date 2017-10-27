@@ -114,6 +114,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/previous_results" />
+
+            <Button
+                android:id="@+id/upComingButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/upcoming_fixtures" />
         </LinearLayout>
 
         <LinearLayout

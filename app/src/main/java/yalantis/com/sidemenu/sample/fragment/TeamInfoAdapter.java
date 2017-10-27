@@ -38,7 +38,7 @@ class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolde
 
     @Override
     public InfoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(team_info, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(team_info, parent, false);
         return new InfoViewHolder(view);
     }
 
@@ -155,7 +155,8 @@ class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolde
         TextView tvDescr;
         @BindView(R.id.preButton)
         Button btnPre;
-
+        @BindView(R.id.upComingButton)
+        Button btnNext;
 
         public InfoViewHolder(View itemView) {
             super(itemView);
@@ -167,6 +168,12 @@ class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolde
                 @Override
                 public void onClick(View view) {
                     listener.onItemClick(team);
+                }
+            });
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemUpClick(team);
                 }
             });
         }

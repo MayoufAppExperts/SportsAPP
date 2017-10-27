@@ -29,7 +29,7 @@ class LiveScoreAdapter extends RecyclerView.Adapter<LiveScoreAdapter.LiveScoreHo
     @Override
     public LiveScoreHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.i("scoread", "Live Scores");
-        View view = LayoutInflater.from(parent.getContext()).inflate(live_score, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(live_score, parent, false);
         return new LiveScoreHolder(view);
     }
 

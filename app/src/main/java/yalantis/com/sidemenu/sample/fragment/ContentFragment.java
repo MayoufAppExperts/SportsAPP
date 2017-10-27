@@ -5,12 +5,19 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.R;
 
 /**
@@ -32,10 +39,17 @@ public class ContentFragment extends Fragment {
     private Bitmap bitmap;
     TextView textView;
 
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout mySwipeRefreshLayout;
+
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         //this.containerView = view.findViewById(R.id.container);
+        ButterKnife.bind(this, view);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -49,5 +63,37 @@ public class ContentFragment extends Fragment {
 //        mImageView.setImageResource(res);
         return rootView;
     }
+
+
+    private void swipeRefresh(View view) {
+
+        //mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        refreshItems();
+                        Toast.makeText(getActivity().getApplicationContext(), "Refreshed", Toast.LENGTH_LONG);
+                        myUpdateOperation();
+                        initialiseRecyclerView(view);
+                    }
+
+                    public void myUpdateOperation() {
+
+                        mySwipeRefreshLayout.setRefreshing(true);
+                    }
+                });
+    }
+
+    private void refreshItems() {
+
+    }
+
+    private void initialiseRecyclerView(View view) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext().getApplicationContext(), 2));
+        Log.d("Recycler View", "Initialised True");
+    }
 }
+
 

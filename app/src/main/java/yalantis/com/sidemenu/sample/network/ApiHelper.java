@@ -6,6 +6,7 @@ import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
+import yalantis.com.sidemenu.sample.network.model.upcomingEvents.UpcomingEvents;
 
 /**
  * Created by TheAppExperts on 18/10/2017.
@@ -18,4 +19,5 @@ public interface ApiHelper {
     Observable<MyTeamModel> useCaseTeamInfo(String id);
     Observable<LiveScores> useCaseLiveScores();
     Observable<PreviousFixtures> useCasePreviousFixtures(String id);
+    Observable<UpcomingEvents> useCaseUpcomingEvents(String id);
 }

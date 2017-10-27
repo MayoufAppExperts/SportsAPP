@@ -15,26 +15,23 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.CompositeDisposable;
-import yalantis.com.sidemenu.sample.AppDataManager;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
-import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
+import yalantis.com.sidemenu.sample.network.model.upcomingEvents.UpcomingEvents;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
-import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpView;
-import yalantis.com.sidemenu.sample.ui.liveScores.LiveScoresPresenter;
-import yalantis.com.sidemenu.sample.ui.utils.rx.AppSchedulerProvider;
+import yalantis.com.sidemenu.sample.ui.upcomingEvents.IUpcomingEventsMvpView;
+import yalantis.com.sidemenu.sample.ui.upcomingEvents.UpcomingEventsPresenter;
 
 import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
 /**
- * Created by TheAppExperts on 23/10/2017.
+ * Created by TheAppExperts on 26/10/2017.
  */
 
-public class LiveScoresFrag extends BaseFragment implements ILiveScoresMvpView {
+public class UpcomingEventsFrag extends BaseFragment implements IUpcomingEventsMvpView{
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -44,47 +41,36 @@ public class LiveScoresFrag extends BaseFragment implements ILiveScoresMvpView {
 
 
     IActivityComponent iActivityComponent;
+    String id = "";
 
     public IActivityComponent getiActivityComponent() {
         return iActivityComponent;
     }
 
     @Inject
-    LiveScoresPresenter<ILiveScoresMvpView> viewLiveScoresPresenter;
+    UpcomingEventsPresenter<IUpcomingEventsMvpView> upcomingEventsPresenter;
 
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("Class Loaded", "Sports");
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
-        //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Log.d("Class Loaded", "Sports");
+
         ButterKnife.bind(this, view);
         initialiseRecyclerView(view);
         initialiseDagger();
 
-        viewLiveScoresPresenter.onAttach(this);
-        viewLiveScoresPresenter.onViewPrepared();
+        id = getArguments().getString("id");
+
+
+        upcomingEventsPresenter.onAttach(this);
+        upcomingEventsPresenter.onViewPrepared(id);
 
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    private void initialiseDagger() {
-        iActivityComponent = DaggerIActivityComponent.builder()
-                .activityModule(new ActivityModule(this))
-                .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
-                .build();
-
-        getiActivityComponent().inject(this);
-    }
-
-    private void initialiseRecyclerView(View view) {
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        Log.i("blahlive", "Initialised True");
     }
 
 
@@ -103,27 +89,35 @@ public class LiveScoresFrag extends BaseFragment implements ILiveScoresMvpView {
 
                     public void myUpdateOperation() {
 
-                        mySwipeRefreshLayout.setRefreshing(false);
+                        mySwipeRefreshLayout.setRefreshing(true);
                     }
                 });
     }
 
     private void refreshItems() {
-        viewLiveScoresPresenter.onAttach(this);
-        viewLiveScoresPresenter.onViewPrepared();
-    }
-
-    @Override
-    public void onLiveScoresFetchCompleted(LiveScores liveScores) {
-        //
-        Log.i("blahblah", liveScores.getTeams().getMatch().get(0).getHomeTeam());
-        //recyclerView.setAdapter(new LiveScoreAdapter(liveScores, R.layout.live_score, getActivity().getApplicationContext()));
-        Log.i("Live Scores", "Completed");
+        upcomingEventsPresenter.onAttach(this);
+        upcomingEventsPresenter.onViewPrepared(id);
 
     }
 
+    private void initialiseDagger() {
+        iActivityComponent = DaggerIActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
+                .build();
+
+        getiActivityComponent().inject(this);
+    }
+
+    private void initialiseRecyclerView(View view) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        Log.d("Recycler View", "Initialised True");
+        //recyclerView.setAdapter(new CakeAdapter(customerModels, R.layout.row, getActivity()));
+    }
+
     @Override
-    public void onError(String message) {
-        Log.i("errorlive", message);
+    public void onFetchUpcomingEvents(UpcomingEvents upcomingEvents) {
+        recyclerView.setAdapter(new UpcomingEventsAdapter(upcomingEvents, R.layout.live_score, getActivity().getApplicationContext()));
     }
 }

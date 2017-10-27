@@ -2,12 +2,14 @@ package yalantis.com.sidemenu.sample.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +32,10 @@ public class MyTeamFrag extends BaseFragment implements IMyTeamMvpView {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout mySwipeRefreshLayout;
+
 
     MyTeamPresenter<IMyTeamMvpView> mvpViewMyTeamPresenter;
 
@@ -60,6 +66,26 @@ public class MyTeamFrag extends BaseFragment implements IMyTeamMvpView {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         Log.d("Recycler View", "Initialised True");
+    }
+
+
+    private void swipeRefresh(View view) {
+
+        //mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Toast.makeText(getActivity().getApplicationContext(), "Refreshed", Toast.LENGTH_LONG);
+                        myUpdateOperation();
+                        initialiseRecyclerView(view);
+                    }
+
+                    public void myUpdateOperation() {
+
+                        mySwipeRefreshLayout.setRefreshing(true);
+                    }
+                });
     }
 
     @Override

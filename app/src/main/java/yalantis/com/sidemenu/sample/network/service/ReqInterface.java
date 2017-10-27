@@ -10,6 +10,7 @@ import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
+import yalantis.com.sidemenu.sample.network.model.upcomingEvents.UpcomingEvents;
 
 /**
  * Created by Mohammed on 01/10/2017.
@@ -34,5 +35,8 @@ public interface ReqInterface {
 
     @GET (API_Constants.PAST_EVENTS)
     Observable<PreviousFixtures> getPreviousResults(@Query("id") String id);
+
+    @GET (API_Constants.NEXT_EVENTS)
+    Observable<UpcomingEvents> getNextEvents(@Query("id") String id);
 
 }

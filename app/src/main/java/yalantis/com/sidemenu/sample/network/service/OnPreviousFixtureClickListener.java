@@ -9,4 +9,5 @@ import yalantis.com.sidemenu.sample.network.model.previousModel.Result;
 
 public interface OnPreviousFixtureClickListener {
     void onItemClick(Team team);
+    void onItemUpClick(Team team);
 }

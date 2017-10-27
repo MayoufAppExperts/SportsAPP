@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,13 +37,19 @@ class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.MyTeamViewHolder>
 
     @Override
     public MyTeamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(row, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(row, parent, false);
         return new MyTeamViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyTeamViewHolder holder, int position) {
         holder.tvName.setText(myTeamModel.getTeams().get(position).getStrTeam());
+
+        Picasso.with(context)
+                .load(myTeamModel.getTeams().get(position).getStrTeamBadge())
+                .resize(250, 250)
+                .into(holder.imgLogo);
+
 
         holder.bind(myTeamModel.getTeams().get(position), onItemClickListener);
 
@@ -53,7 +62,10 @@ class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.MyTeamViewHolder>
 
     public class MyTeamViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.clubName)TextView tvName;
+        @BindView(R.id.clubName)
+        TextView tvName;
+        @BindView(R.id.imageView)
+        ImageView imgLogo;
 
         public MyTeamViewHolder(View itemView) {
             super(itemView);

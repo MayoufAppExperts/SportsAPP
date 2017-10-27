@@ -11,6 +11,7 @@ import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
+import yalantis.com.sidemenu.sample.network.model.upcomingEvents.UpcomingEvents;
 import yalantis.com.sidemenu.sample.network.service.ConnectionService;
 import yalantis.com.sidemenu.sample.network.service.ReqInterface;
 
@@ -55,6 +56,11 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Observable<PreviousFixtures> useCasePreviousFixtures(String id) {
         return reqInterface.getPreviousResults(id);
+    }
+
+    @Override
+    public Observable<UpcomingEvents> useCaseUpcomingEvents(String id) {
+        return reqInterface.getNextEvents(id);
     }
 
 
