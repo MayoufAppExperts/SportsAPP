@@ -1,11 +1,13 @@
 package yalantis.com.sidemenu.sample.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,8 +22,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.CompositeDisposable;
-import yalantis.com.sidemenu.sample.AppDataManager;
+import me.piruin.quickaction.ActionItem;
+import me.piruin.quickaction.QuickAction;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.Country;
@@ -33,7 +35,6 @@ import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpView;
 import yalantis.com.sidemenu.sample.ui.leagues.LeaguesPresenter;
-import yalantis.com.sidemenu.sample.ui.utils.rx.AppSchedulerProvider;
 
 import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
@@ -48,6 +49,14 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
     SwipeRefreshLayout mySwipeRefreshLayout;
 
     IActivityComponent iActivityComponent;
+
+
+    private static final int ID_UP = 1;
+    private static final int ID_DOWN = 2;
+    private static final int ID_SEARCH = 3;
+
+    private QuickAction quickAction;
+
 
     public IActivityComponent getiActivityComponent() {
         return iActivityComponent;
@@ -69,6 +78,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
         ButterKnife.bind(this, view);
         initialiseRecyclerView(view);
         initialiseDagger();
+        quickActionInitialise();
 /*
 
         viewLeaguesPresenter = new LeaguesPresenter<>(
@@ -81,8 +91,25 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
         viewLeaguesPresenter.onViewPrepared();
 
 
-
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void quickActionInitialise() {
+        QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
+        QuickAction.setDefaultTextColor(Color.BLACK);
+
+        ActionItem nextItem = new ActionItem(ID_DOWN, "Teams", R.drawable.icn_1);
+        ActionItem prevItem = new ActionItem(ID_UP, "League Info", R.drawable.icn_2);
+        ActionItem fixturesItem = new ActionItem(ID_SEARCH, "Fixtures", R.drawable.icn_3);
+        prevItem.setSticky(true);
+        nextItem.setSticky(true);
+        fixturesItem.setSticky(true);
+
+        quickAction = new QuickAction(getContext(), QuickAction.HORIZONTAL);
+        quickAction.setColorRes(R.color.colorPrimary);
+        quickAction.setTextColorRes(R.color.cardview_light_background);
+
+        quickAction.addActionItem(nextItem, prevItem, fixturesItem);
     }
 
 
@@ -132,16 +159,53 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
     public void onFetchLeagueCompleted(final FootballModel footballModel) {
         recyclerView.setAdapter(new FootballAdapter(footballModel, R.layout.row, getActivity().getApplicationContext(), new OnItemClickListener() {
             @Override
-            public void onItemClick(Country country) {
-                String cid = country.getIdLeague();
-                Fragment fr =new TeamsInLeaguesFrag();
-                FragmentManager fm=getFragmentManager();
-                FragmentTransaction ft=fm.beginTransaction();
-                Bundle args = new Bundle();
-                args.putString("id", cid);
-                fr.setArguments(args);
-                ft.replace(R.id.content_frame, fr);
-                ft.commit();
+            public void onItemClick(View view, Country country) {
+                quickAction.show(view);
+                quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+                    @Override
+                    public void onItemClick(ActionItem item) {
+                        String title = item.getTitle();
+                        if (title == "Teams") {
+                            String cid = country.getIdLeague();
+                            Fragment fr = new TeamsInLeaguesFrag();
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            Bundle args = new Bundle();
+                            args.putString("id", cid);
+                            fr.setArguments(args);
+                            ft.replace(R.id.content_frame, fr);
+                            ft.commit();
+                            quickAction.dismiss();
+                        }else if (title == "League Info"){
+                            String cid = country.getIdLeague();
+                            Fragment fr = new LeagueInfoFrag();
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            Bundle args = new Bundle();
+                            args.putString("id", cid);
+                            fr.setArguments(args);
+                            ft.replace(R.id.content_frame, fr);
+                            ft.commit();
+                            quickAction.dismiss();
+
+                        }else if (title == "Fixtures"){
+                            String cid = country.getIdLeague();
+                            Fragment fr = new LeaguePreResultsFrag();
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            Bundle args = new Bundle();
+                            args.putString("id", cid);
+                            fr.setArguments(args);
+                            ft.replace(R.id.content_frame, fr);
+                            ft.commit();
+                            quickAction.dismiss();
+                        }
+                        else {
+                            Toast.makeText(getActivity(), title + " selected", Toast.LENGTH_SHORT).show();
+                            // if (!item.isSticky()) quickAction.remove(item);
+                        }
+                    }
+                });
             }
         }));
         Log.i("Fetch", "Completed");

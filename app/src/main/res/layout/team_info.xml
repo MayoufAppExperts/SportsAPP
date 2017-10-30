@@ -77,29 +77,25 @@
                 android:id="@+id/manager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Manger" />
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/stadiumName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="StadiumName" />
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/seatCapacity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="SeatCapacity" />
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/stadiumLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Stadium Location" />
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/teamCountry"

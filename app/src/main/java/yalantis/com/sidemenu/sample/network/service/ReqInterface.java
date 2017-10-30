@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import yalantis.com.sidemenu.sample.network.model.API_Constants;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
+import yalantis.com.sidemenu.sample.network.model.leagueInfo.LeagueInfo;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
@@ -38,5 +39,8 @@ public interface ReqInterface {
 
     @GET (API_Constants.NEXT_EVENTS)
     Observable<UpcomingEvents> getNextEvents(@Query("id") String id);
+
+    @GET (API_Constants.LEAGUE_INFO)
+    Observable<LeagueInfo> getLeagueInfo(@Query("id") String id);
 
 }

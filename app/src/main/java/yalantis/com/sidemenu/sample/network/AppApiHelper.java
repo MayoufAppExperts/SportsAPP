@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
+import yalantis.com.sidemenu.sample.network.model.leagueInfo.LeagueInfo;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
@@ -61,6 +62,11 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Observable<UpcomingEvents> useCaseUpcomingEvents(String id) {
         return reqInterface.getNextEvents(id);
+    }
+
+    @Override
+    public Observable<LeagueInfo> useCaseLeagueInfo(String id) {
+        return reqInterface.getLeagueInfo(id);
     }
 
 

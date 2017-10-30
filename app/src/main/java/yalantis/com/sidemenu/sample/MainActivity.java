@@ -4,6 +4,8 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,16 +37,29 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private List<SlideMenuItem> list = new ArrayList<>();
     private ViewAnimator viewAnimator;
     private LinearLayout linearLayout;
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //contentFragment = ContentFragment.newInstance(R.drawable.content_music);
+        fragmentManager.popBackStack();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, new ContentFragment())
+                .replace(R.id.content_frame, new LeaguesFrag())
+                .addToBackStack(null)
                 .commit();
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         linearLayout = (LinearLayout) findViewById(R.id.left_drawer);
@@ -163,30 +178,27 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     @Override
     public boolean onSwitch(Resourceble slideMenuItem, int position) {
-        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         //Log.i("Switch", "called");
         switch (slideMenuItem.getName()) {
             case ContentFragment.BUILDING:
                 Log.d("switch", "second called");
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new MyTeamFrag())
+                fragmentTransaction.replace(R.id.content_frame, new MyTeamFrag())
                         .commit();
                 replaceFragment(position);
                 return true;
 
             case ContentFragment.CASE:
                 Log.d("switch", "third called");
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new LeaguesFrag())
+                fragmentTransaction.replace(R.id.content_frame, new LeaguesFrag())
                         .commit();
                 replaceFragment(position);
                 return true;
 
-            case  ContentFragment.BOOK:
+            case ContentFragment.BOOK:
                 Log.d("live", "score");
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new LiveScoresFrag())
+                fragmentTransaction.replace(R.id.content_frame, new LiveScoresFrag())
                         .commit();
                 replaceFragment(position);
                 return true;

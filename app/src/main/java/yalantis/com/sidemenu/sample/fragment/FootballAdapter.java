@@ -22,7 +22,7 @@ import yalantis.com.sidemenu.sample.network.service.OnItemClickListener;
  * Created by TheAppExperts on 18/10/2017.
  */
 
-class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.FootballViewHolder> {
+public class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.FootballViewHolder> {
 
     FootballModel footballModel;
     int row;
@@ -68,7 +68,12 @@ class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.FootballViewH
         TextView tvClub;
         @BindView(R.id.imageView)
         ImageView imgLogo;
-
+        @BindView(R.id.leagueInfo)
+        TextView tvLeague;
+        @BindView(R.id.preClick)
+        TextView tvPrevious;
+        @BindView(R.id.fixClick)
+        TextView tvFixtures;
         public FootballViewHolder(View itemView) {
             super(itemView);
 
@@ -79,7 +84,25 @@ class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.FootballViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.onItemClick(country);
+                    onItemClickListener.onItemClick(view, country);
+                }
+            });
+            tvLeague.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(view, country);
+                }
+            });
+            tvPrevious.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(view, country);
+                }
+            });
+            tvFixtures.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(view, country);
                 }
             });
         }

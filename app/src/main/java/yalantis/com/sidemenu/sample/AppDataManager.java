@@ -8,6 +8,7 @@ import io.reactivex.Observable;
 import yalantis.com.sidemenu.sample.network.ApiHelper;
 import yalantis.com.sidemenu.sample.network.AppApiHelper;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
+import yalantis.com.sidemenu.sample.network.model.leagueInfo.LeagueInfo;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
@@ -60,5 +61,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<UpcomingEvents> useCaseUpcomingEvents(String id) {
         return apiHelper.useCaseUpcomingEvents(id);
+    }
+
+    @Override
+    public Observable<LeagueInfo> useCaseLeagueInfo(String id) {
+        return apiHelper.useCaseLeagueInfo(id);
     }
 }

@@ -1,6 +1,7 @@
 package yalantis.com.sidemenu.sample.sdi.component;
 
 import dagger.Component;
+import yalantis.com.sidemenu.sample.fragment.LeagueInfoFrag;
 import yalantis.com.sidemenu.sample.fragment.LeaguesFrag;
 import yalantis.com.sidemenu.sample.fragment.LiveScoresFrag;
 import yalantis.com.sidemenu.sample.fragment.PreviousResultFrag;
@@ -23,4 +24,5 @@ public interface IActivityComponent {
     void inject (TeamInfoFrag teamInfoFrag);
     void inject (PreviousResultFrag previousResultFrag);
     void inject (UpcomingEventsFrag upcomingEventsFrag);
+    void inject (LeagueInfoFrag leagueInfoFrag);
 }

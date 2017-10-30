@@ -7,6 +7,9 @@ import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
+import yalantis.com.sidemenu.sample.ui.leagueInfo.ILeagueInfoMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.leagueInfo.ILeagueInfoMvpView;
+import yalantis.com.sidemenu.sample.ui.leagueInfo.LeagueInfoPresenter;
 import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpView;
 import yalantis.com.sidemenu.sample.ui.leagues.LeaguesPresenter;
@@ -79,6 +82,11 @@ public class ActivityModule {
     @Provides
     IUpcomingEventsMvpPresenter<IUpcomingEventsMvpView> iUpcomingEventsMvpViewIUpcomingEventsMvpPresenter(UpcomingEventsPresenter<IUpcomingEventsMvpView> upcomingEventsPresenter){
         return upcomingEventsPresenter;
+    }
+
+    @Provides
+    ILeagueInfoMvpPresenter<ILeagueInfoMvpView> iLeagueInfoMvpViewILeagueInfoMvpPresenter (LeagueInfoPresenter<ILeagueInfoMvpView> leagueInfoPresenter){
+        return leagueInfoPresenter;
     }
 }
 
