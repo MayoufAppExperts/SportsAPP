@@ -16,6 +16,12 @@ import yalantis.com.sidemenu.sample.ui.leagues.LeaguesPresenter;
 import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpView;
 import yalantis.com.sidemenu.sample.ui.liveScores.LiveScoresPresenter;
+import yalantis.com.sidemenu.sample.ui.nextLeague.INextLeagueFixMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.nextLeague.INextLeagueFixMvpView;
+import yalantis.com.sidemenu.sample.ui.nextLeague.NextLeagueFixPresenter;
+import yalantis.com.sidemenu.sample.ui.prevScoresLeague.IPrevLeagueResultsMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.prevScoresLeague.IPrevLeagueResultsMvpView;
+import yalantis.com.sidemenu.sample.ui.prevScoresLeague.PrevLeagueResultsPresenter;
 import yalantis.com.sidemenu.sample.ui.previousScores.IPreviousResultMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.previousScores.IPreviousResultMvpView;
 import yalantis.com.sidemenu.sample.ui.previousScores.PreviousResultPresenter;
@@ -59,34 +65,44 @@ public class ActivityModule {
 
 
     @Provides
-    ILeaguesMvpPresenter<ILeaguesMvpView> iLeaguesMvpViewILeaguesMvpPresenter (LeaguesPresenter<ILeaguesMvpView> leaguesPresenter){
+    ILeaguesMvpPresenter<ILeaguesMvpView> iLeaguesMvpViewILeaguesMvpPresenter(LeaguesPresenter<ILeaguesMvpView> leaguesPresenter) {
         return leaguesPresenter;
     }
 
     @Provides
-    ILiveScoresMvpPresenter<ILiveScoresMvpView> iLiveScoresMvpViewILiveScoresMvpPresenter (LiveScoresPresenter<ILiveScoresMvpView> scoresPresenter){
+    ILiveScoresMvpPresenter<ILiveScoresMvpView> iLiveScoresMvpViewILiveScoresMvpPresenter(LiveScoresPresenter<ILiveScoresMvpView> scoresPresenter) {
         return scoresPresenter;
     }
 
     @Provides
-    ITeamInfoMvpPresenter<ITeamInfoMvpView> iTeamInfoMvpViewITeamInfoMvpPresenter(TeamInfoPresenter<ITeamInfoMvpView> teamInfoPresenter){
+    ITeamInfoMvpPresenter<ITeamInfoMvpView> iTeamInfoMvpViewITeamInfoMvpPresenter(TeamInfoPresenter<ITeamInfoMvpView> teamInfoPresenter) {
         return teamInfoPresenter;
 
     }
 
     @Provides
-    IPreviousResultMvpPresenter<IPreviousResultMvpView> iPreviousResultMvpViewIPreviousResultMvpPresenter(PreviousResultPresenter<IPreviousResultMvpView> previousResultPresenter){
+    IPreviousResultMvpPresenter<IPreviousResultMvpView> iPreviousResultMvpViewIPreviousResultMvpPresenter(PreviousResultPresenter<IPreviousResultMvpView> previousResultPresenter) {
         return previousResultPresenter;
     }
 
     @Provides
-    IUpcomingEventsMvpPresenter<IUpcomingEventsMvpView> iUpcomingEventsMvpViewIUpcomingEventsMvpPresenter(UpcomingEventsPresenter<IUpcomingEventsMvpView> upcomingEventsPresenter){
+    IUpcomingEventsMvpPresenter<IUpcomingEventsMvpView> iUpcomingEventsMvpViewIUpcomingEventsMvpPresenter(UpcomingEventsPresenter<IUpcomingEventsMvpView> upcomingEventsPresenter) {
         return upcomingEventsPresenter;
     }
 
     @Provides
-    ILeagueInfoMvpPresenter<ILeagueInfoMvpView> iLeagueInfoMvpViewILeagueInfoMvpPresenter (LeagueInfoPresenter<ILeagueInfoMvpView> leagueInfoPresenter){
+    ILeagueInfoMvpPresenter<ILeagueInfoMvpView> iLeagueInfoMvpViewILeagueInfoMvpPresenter(LeagueInfoPresenter<ILeagueInfoMvpView> leagueInfoPresenter) {
         return leagueInfoPresenter;
+    }
+
+    @Provides
+    IPrevLeagueResultsMvpPresenter<IPrevLeagueResultsMvpView> iPrevLeagueResultsMvpPresenter(PrevLeagueResultsPresenter<IPrevLeagueResultsMvpView> leagueResultsPresenter) {
+        return leagueResultsPresenter;
+    }
+
+    @Provides
+    INextLeagueFixMvpPresenter<INextLeagueFixMvpView> iNextLeagueFixMvpPresenter (NextLeagueFixPresenter<INextLeagueFixMvpView> nextLeagueFixPresenter){
+        return nextLeagueFixPresenter;
     }
 }
 

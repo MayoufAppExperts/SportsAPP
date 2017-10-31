@@ -2,7 +2,6 @@ package yalantis.com.sidemenu.sample.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,23 +16,25 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.network.model.leagueNextFix.LeaguesNext;
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
+import yalantis.com.sidemenu.sample.ui.nextLeague.INextLeagueFixMvpView;
+import yalantis.com.sidemenu.sample.ui.nextLeague.NextLeagueFixPresenter;
 import yalantis.com.sidemenu.sample.ui.prevScoresLeague.IPrevLeagueResultsMvpView;
 import yalantis.com.sidemenu.sample.ui.prevScoresLeague.PrevLeagueResultsPresenter;
-import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
-import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
 
 import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
 /**
- * Created by TheAppExperts on 30/10/2017.
+ * Created by TheAppExperts on 31/10/2017.
  */
 
-public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueResultsMvpView {
+public class NextLeagueFixFrag extends BaseFragment implements INextLeagueFixMvpView {
+
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -49,7 +50,7 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
     }
 
     @Inject
-    PrevLeagueResultsPresenter<IPrevLeagueResultsMvpView> prevLeagueResultsPresenter;
+    NextLeagueFixPresenter<INextLeagueFixMvpView> viewNextLeagueFixPresenter;
 
     String id = "";
 
@@ -67,8 +68,10 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
 
         id = getArguments().getString("id");
 
-        prevLeagueResultsPresenter.onAttach(this);
-        prevLeagueResultsPresenter.onViewPrepared(id);
+        Log.i("NextFix","ID is " + id);
+
+        viewNextLeagueFixPresenter.onAttach(this);
+        viewNextLeagueFixPresenter.onViewPrepared(id);
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -89,8 +92,12 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
     }
 
     @Override
-    public void onFetchPrevResultsCompleted(LeaguesPrev leaguesPrev) {
+    public void onError(String message) {
+        Log.i("errornext", message);
+    }
 
-        recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext()));
+    @Override
+    public void onFetchNextLeagueCompleted(LeaguesNext leaguesNext) {
+        recyclerView.setAdapter(new LeaguesNextAdapter(leaguesNext, R.layout.live_score, getActivity().getApplicationContext()));
     }
 }

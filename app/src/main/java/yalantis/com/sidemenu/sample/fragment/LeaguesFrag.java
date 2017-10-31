@@ -54,6 +54,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
     private static final int ID_UP = 1;
     private static final int ID_DOWN = 2;
     private static final int ID_SEARCH = 3;
+    private static final int ID_INFO = 4;
 
     private QuickAction quickAction;
 
@@ -101,15 +102,17 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
         ActionItem nextItem = new ActionItem(ID_DOWN, "Teams", R.drawable.icn_1);
         ActionItem prevItem = new ActionItem(ID_UP, "League Info", R.drawable.icn_2);
         ActionItem fixturesItem = new ActionItem(ID_SEARCH, "Fixtures", R.drawable.icn_3);
+        ActionItem upcomingItem = new ActionItem(ID_INFO, "Results", R.drawable.icn_4);
         prevItem.setSticky(true);
         nextItem.setSticky(true);
         fixturesItem.setSticky(true);
+        upcomingItem.setSticky(true);
 
         quickAction = new QuickAction(getContext(), QuickAction.HORIZONTAL);
         quickAction.setColorRes(R.color.colorPrimary);
         quickAction.setTextColorRes(R.color.cardview_light_background);
 
-        quickAction.addActionItem(nextItem, prevItem, fixturesItem);
+        quickAction.addActionItem(nextItem, prevItem, fixturesItem, upcomingItem);
     }
 
 
@@ -191,6 +194,17 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                         }else if (title == "Fixtures"){
                             String cid = country.getIdLeague();
                             Fragment fr = new LeaguePreResultsFrag();
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            Bundle args = new Bundle();
+                            args.putString("id", cid);
+                            fr.setArguments(args);
+                            ft.replace(R.id.content_frame, fr);
+                            ft.commit();
+                            quickAction.dismiss();
+                        }else if (title == "Results"){
+                            String cid = country.getIdLeague();
+                            Fragment fr = new NextLeagueFixFrag();
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
                             Bundle args = new Bundle();

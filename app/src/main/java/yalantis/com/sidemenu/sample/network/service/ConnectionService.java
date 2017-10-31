@@ -1,5 +1,7 @@
 package yalantis.com.sidemenu.sample.network.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
@@ -22,11 +24,14 @@ public class ConnectionService {
 
     public static ReqInterface getConnectionService() {
 
+        //Gson gson = new GsonBuilder().setLenient().create();
+
+
         okHttpClient = buildClient();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(API_Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())//gson))
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

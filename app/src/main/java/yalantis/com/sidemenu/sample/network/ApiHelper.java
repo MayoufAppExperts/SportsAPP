@@ -3,7 +3,10 @@ package yalantis.com.sidemenu.sample.network;
 
 import io.reactivex.Observable;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
+import yalantis.com.sidemenu.sample.network.model.leagueInfo.League;
 import yalantis.com.sidemenu.sample.network.model.leagueInfo.LeagueInfo;
+import yalantis.com.sidemenu.sample.network.model.leagueNextFix.LeaguesNext;
+import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
@@ -22,4 +25,6 @@ public interface ApiHelper {
     Observable<PreviousFixtures> useCasePreviousFixtures(String id);
     Observable<UpcomingEvents> useCaseUpcomingEvents(String id);
     Observable<LeagueInfo> useCaseLeagueInfo(String id);
+    Observable<LeaguesPrev> useCasePreviousLeagueResults(String id);
+    Observable<LeaguesNext> useCaseNextLeagueFixtures(String id);
 }

@@ -17,4 +17,6 @@ public class API_Constants {
     public static final String PAST_EVENTS ="eventslast.php";
     public static final String NEXT_EVENTS = "eventsnext.php";
     public static final String LEAGUE_INFO = "lookupleague.php";
+    public static final String PREV_LEAGUE_RESULTS = "eventspastleague.php";
+    public static final String  NEXT_LEAGUE_FIX = "eventsnextleague.php";
 }
