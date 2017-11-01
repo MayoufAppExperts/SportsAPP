@@ -79,4 +79,9 @@ public class AppDataManager implements DataManager {
     public Observable<LeaguesNext> useCaseNextLeagueFixtures(String id) {
         return apiHelper.useCaseNextLeagueFixtures(id);
     }
+
+    @Override
+    public Observable<LeaguesPrev> useCaseDayEvents(String date) {
+        return apiHelper.useCaseDayEvents(date);
+    }
 }

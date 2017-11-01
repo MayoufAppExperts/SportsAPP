@@ -17,26 +17,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.piruin.quickaction.ActionItem;
 import me.piruin.quickaction.QuickAction;
-import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.Country;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.service.OnItemClickListener;
-import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
-import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpView;
 import yalantis.com.sidemenu.sample.ui.leagues.LeaguesPresenter;
 
-import static yalantis.com.sidemenu.sample.MyApp.getApplication;
+//import yalantis.com.sidemenu.sample.realm.RealmController;
+//import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 
 
 public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
@@ -58,6 +55,9 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
     private QuickAction quickAction;
 
+//    Realm realm;
+//    RealmController realmController;
+
 
     public IActivityComponent getiActivityComponent() {
         return iActivityComponent;
@@ -77,16 +77,11 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         ButterKnife.bind(this, view);
+        //initialiseRealm();
         initialiseRecyclerView(view);
         initialiseDagger();
         quickActionInitialise();
-/*
-
-        viewLeaguesPresenter = new LeaguesPresenter<>(
-                new AppDataManager(),
-                new AppSchedulerProvider(),
-                new CompositeDisposable());
-*/
+        isNetworkConnected();
 
         viewLeaguesPresenter.onAttach(this);
         viewLeaguesPresenter.onViewPrepared();
@@ -94,6 +89,18 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
         super.onViewCreated(view, savedInstanceState);
     }
+
+/*    private void initialiseRealm() {
+        Realm.init(getActivity().getApplicationContext());
+        realm=Realm.getDefaultInstance();
+        realmController=new RealmController(realm);
+    }*/
+/*
+    public boolean isNetworkConnected(){
+        ConnectivityManager connectivityManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return false;
+
+    }*/
 
     private void quickActionInitialise() {
         QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
@@ -142,13 +149,13 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
     }
 
-    private void initialiseDagger() {
+    private void initialiseDagger() {/*
         iActivityComponent = DaggerIActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
                 .build();
 
-        getiActivityComponent().inject(this);
+        getiActivityComponent().inject(this);*/
     }
 
     private void initialiseRecyclerView(View view) {

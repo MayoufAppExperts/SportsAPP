@@ -9,23 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.leagueInfo.LeagueInfo;
-import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
-import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.leagueInfo.ILeagueInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.leagueInfo.LeagueInfoPresenter;
 
-import static yalantis.com.sidemenu.sample.MyApp.getApplication;
+//import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 
 /**
  * Created by TheAppExperts on 30/10/2017.
@@ -39,10 +35,6 @@ public class LeagueInfoFrag extends BaseFragment implements ILeagueInfoMvpView {
 
     @BindView(R.id.swipeRefresh)
     SwipeRefreshLayout mySwipeRefreshLayout;
-
-
-
-
 
     IActivityComponent iActivityComponent;
 
@@ -74,13 +66,13 @@ public class LeagueInfoFrag extends BaseFragment implements ILeagueInfoMvpView {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void initialiseDagger() {
+    private void initialiseDagger() {/*
         iActivityComponent = DaggerIActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
                 .build();
 
-        getiActivityComponent().inject(this);
+        getiActivityComponent().inject(this);*/
     }
 
     private void initialiseRecyclerView(View view) {

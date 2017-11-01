@@ -18,16 +18,17 @@ import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
-import yalantis.com.sidemenu.sample.ui.prevScoresLeague.IPrevLeagueResultsMvpView;
-import yalantis.com.sidemenu.sample.ui.prevScoresLeague.PrevLeagueResultsPresenter;
+import yalantis.com.sidemenu.sample.ui.dayEvents.DayEventPresenter;
+import yalantis.com.sidemenu.sample.ui.dayEvents.IDayEventMvpView;
 
 //import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 
 /**
- * Created by TheAppExperts on 30/10/2017.
+ * Created by TheAppExperts on 31/10/2017.
  */
 
-public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueResultsMvpView {
+public class DayEventFrag extends BaseFragment implements IDayEventMvpView {
+
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -35,17 +36,15 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
     @BindView(R.id.swipeRefresh)
     SwipeRefreshLayout mySwipeRefreshLayout;
 
-
     IActivityComponent iActivityComponent;
+    String d = "";
 
     public IActivityComponent getiActivityComponent() {
         return iActivityComponent;
     }
 
     @Inject
-    PrevLeagueResultsPresenter<IPrevLeagueResultsMvpView> prevLeagueResultsPresenter;
-
-    String id = "";
+    DayEventPresenter<IDayEventMvpView> dayEventPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,17 +57,17 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
         ButterKnife.bind(this, view);
         initialiseRecyclerView(view);
         initialiseDagger();
+        //id = getArguments().getString("id");
 
-        id = getArguments().getString("id");
-
-        prevLeagueResultsPresenter.onAttach(this);
-        prevLeagueResultsPresenter.onViewPrepared(id);
+        d = "2017-10-10";
+        dayEventPresenter.onAttach(this);
+        dayEventPresenter.onViewPrepared(d);
 
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void initialiseDagger() {
-/*        iActivityComponent = DaggerIActivityComponent.builder()
+    private void initialiseDagger() {/*
+        iActivityComponent = DaggerIActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
                 .build();
@@ -83,8 +82,12 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
     }
 
     @Override
-    public void onFetchPrevResultsCompleted(LeaguesPrev leaguesPrev) {
-
+    public void onFetchDayEventCompleted(LeaguesPrev leaguesPrev) {
         recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext()));
+    }
+
+    @Override
+    public void onError(String message) {
+        Log.i("errorDay", message);
     }
 }

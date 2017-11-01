@@ -1,12 +1,12 @@
 package yalantis.com.sidemenu.sample.sdi.module;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
-
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
+import yalantis.com.sidemenu.sample.ui.dayEvents.DayEventPresenter;
+import yalantis.com.sidemenu.sample.ui.dayEvents.IDayEventMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.dayEvents.IDayEventMvpView;
 import yalantis.com.sidemenu.sample.ui.leagueInfo.ILeagueInfoMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.leagueInfo.ILeagueInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.leagueInfo.LeagueInfoPresenter;
@@ -103,6 +103,10 @@ public class ActivityModule {
     @Provides
     INextLeagueFixMvpPresenter<INextLeagueFixMvpView> iNextLeagueFixMvpPresenter (NextLeagueFixPresenter<INextLeagueFixMvpView> nextLeagueFixPresenter){
         return nextLeagueFixPresenter;
+    }
+    @Provides
+    IDayEventMvpPresenter<IDayEventMvpView> iDayEventMvpPresenter (DayEventPresenter<IDayEventMvpView> dayEventPresenter){
+        return dayEventPresenter;
     }
 }
 

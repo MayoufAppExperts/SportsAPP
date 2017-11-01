@@ -1,8 +1,6 @@
 package yalantis.com.sidemenu.sample.network;
 
 
-import android.util.Log;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -79,6 +77,11 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Observable<LeaguesNext> useCaseNextLeagueFixtures(String id) {
         return reqInterface.getNextLeagueFixtures(id, "");
+    }
+
+    @Override
+    public Observable<LeaguesPrev> useCaseDayEvents(String d) {
+        return reqInterface.getEventByDay(d, "Soccer");
     }
 
 

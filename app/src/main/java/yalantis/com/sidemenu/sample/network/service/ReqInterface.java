@@ -51,4 +51,7 @@ public interface ReqInterface {
     @GET (API_Constants.NEXT_LEAGUE_FIX)
     Observable<LeaguesNext> getNextLeagueFixtures(@Query("id") String id, @Query("r") String r);
 
+    @GET (API_Constants.DAY_EVENT)
+    Observable<LeaguesPrev> getEventByDay(@Query("d") String date, @Query("s") String s);
+
 }

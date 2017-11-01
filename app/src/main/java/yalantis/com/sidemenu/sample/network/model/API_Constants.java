@@ -1,7 +1,5 @@
 package yalantis.com.sidemenu.sample.network.model;
 
-import java.security.PublicKey;
-
 /**
  * Created by TheAppExperts on 18/10/2017.
  */
@@ -18,5 +16,6 @@ public class API_Constants {
     public static final String NEXT_EVENTS = "eventsnext.php";
     public static final String LEAGUE_INFO = "lookupleague.php";
     public static final String PREV_LEAGUE_RESULTS = "eventspastleague.php";
-    public static final String  NEXT_LEAGUE_FIX = "eventsnextleague.php";
+    public static final String NEXT_LEAGUE_FIX = "eventsnextleague.php";
+    public static final String DAY_EVENT = "eventsday.php";
 }

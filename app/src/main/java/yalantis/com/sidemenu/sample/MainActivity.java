@@ -25,6 +25,7 @@ import io.codetail.animation.ViewAnimationUtils;
 import yalantis.com.sidemenu.interfaces.Resourceble;
 import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.sample.fragment.ContentFragment;
+import yalantis.com.sidemenu.sample.fragment.DayEventFrag;
 import yalantis.com.sidemenu.sample.fragment.LeaguesFrag;
 import yalantis.com.sidemenu.sample.fragment.LiveScoresFrag;
 import yalantis.com.sidemenu.sample.fragment.MyTeamFrag;
@@ -199,6 +200,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.BOOK:
                 Log.d("live", "score");
                 fragmentTransaction.replace(R.id.content_frame, new LiveScoresFrag())
+                        .commit();
+                replaceFragment(position);
+                return true;
+            case ContentFragment.PAINT:
+                fragmentTransaction.replace(R.id.content_frame, new DayEventFrag())
                         .commit();
                 replaceFragment(position);
                 return true;
