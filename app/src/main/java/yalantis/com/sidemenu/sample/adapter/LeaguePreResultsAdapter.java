@@ -1,4 +1,4 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +17,7 @@ import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
  * Created by TheAppExperts on 31/10/2017.
  */
 
-class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResultsAdapter.InfoViewHolder>{
+public class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResultsAdapter.InfoViewHolder>{
     LeaguesPrev leaguesPrev;
     int live_score;
     Context applicationContext;

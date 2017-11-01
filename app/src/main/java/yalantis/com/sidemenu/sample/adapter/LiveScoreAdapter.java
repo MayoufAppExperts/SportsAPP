@@ -1,4 +1,4 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

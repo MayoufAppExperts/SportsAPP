@@ -1,18 +1,17 @@
 package yalantis.com.sidemenu.sample.realm;
 
-import java.util.List;
-
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class FootballModelRealm extends RealmObject {
 
-    private List<CountryRealm> countrys = null;
+    private RealmList<CountryRealm> countrys = null;
 
-    public List<CountryRealm> getCountrys() {
+    public RealmList<CountryRealm> getCountrys() {
         return countrys;
     }
 
-    public void setCountrys(List<CountryRealm> countrys) {
+    public void setCountrys(RealmList<CountryRealm> countrys) {
         this.countrys = countrys;
     }
 

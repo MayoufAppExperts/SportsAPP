@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import yalantis.com.sidemenu.sample.AppDataManager;
 import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.adapter.MyTeamAdapter;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.myteam.Team;
 import yalantis.com.sidemenu.sample.network.service.OnTeamInfoClickListener;

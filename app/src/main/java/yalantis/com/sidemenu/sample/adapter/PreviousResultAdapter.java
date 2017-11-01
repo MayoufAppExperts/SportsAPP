@@ -1,14 +1,11 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +17,7 @@ import yalantis.com.sidemenu.sample.network.model.previousModel.Result;
  * Created by TheAppExperts on 25/10/2017.
  */
 
-class PreviousResultAdapter extends RecyclerView.Adapter<PreviousResultAdapter.PreViewHolder> {
+public class PreviousResultAdapter extends RecyclerView.Adapter<PreviousResultAdapter.PreViewHolder> {
 
     PreviousFixtures previousFixtures;
     int live_score;

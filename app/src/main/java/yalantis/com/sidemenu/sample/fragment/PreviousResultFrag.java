@@ -17,12 +17,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.adapter.PreviousResultAdapter;
 import yalantis.com.sidemenu.sample.network.model.previousModel.PreviousFixtures;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
-import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpView;
 import yalantis.com.sidemenu.sample.ui.previousScores.IPreviousResultMvpView;
 import yalantis.com.sidemenu.sample.ui.previousScores.PreviousResultPresenter;
 

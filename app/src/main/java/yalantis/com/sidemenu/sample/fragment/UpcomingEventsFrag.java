@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.adapter.UpcomingEventsAdapter;
 import yalantis.com.sidemenu.sample.network.model.upcomingEvents.UpcomingEvents;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;

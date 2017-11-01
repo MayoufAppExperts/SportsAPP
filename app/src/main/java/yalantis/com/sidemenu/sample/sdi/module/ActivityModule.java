@@ -28,6 +28,9 @@ import yalantis.com.sidemenu.sample.ui.previousScores.PreviousResultPresenter;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
+import yalantis.com.sidemenu.sample.ui.teams_in_league.ITeamsInLeagueMvpPresenter;
+import yalantis.com.sidemenu.sample.ui.teams_in_league.ITeamsInLeagueMvpView;
+import yalantis.com.sidemenu.sample.ui.teams_in_league.TeamsInLeaguePresenter;
 import yalantis.com.sidemenu.sample.ui.upcomingEvents.IUpcomingEventsMvpPresenter;
 import yalantis.com.sidemenu.sample.ui.upcomingEvents.IUpcomingEventsMvpView;
 import yalantis.com.sidemenu.sample.ui.upcomingEvents.UpcomingEventsPresenter;
@@ -107,6 +110,11 @@ public class ActivityModule {
     @Provides
     IDayEventMvpPresenter<IDayEventMvpView> iDayEventMvpPresenter (DayEventPresenter<IDayEventMvpView> dayEventPresenter){
         return dayEventPresenter;
+    }
+
+    @Provides
+    ITeamsInLeagueMvpPresenter<ITeamsInLeagueMvpView> iTeamsInLeagueMvpPresenter (TeamsInLeaguePresenter<ITeamsInLeagueMvpView> teamsInLeaguePresenter){
+        return teamsInLeaguePresenter;
     }
 }
 

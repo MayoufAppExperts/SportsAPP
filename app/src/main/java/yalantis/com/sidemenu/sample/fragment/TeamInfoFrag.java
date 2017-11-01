@@ -18,13 +18,11 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.CompositeDisposable;
-import yalantis.com.sidemenu.sample.AppDataManager;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.adapter.TeamInfoAdapter;
 import yalantis.com.sidemenu.sample.network.model.myteam.MyTeamModel;
 import yalantis.com.sidemenu.sample.network.model.myteam.Team;
-import yalantis.com.sidemenu.sample.network.model.previousModel.Result;
 import yalantis.com.sidemenu.sample.network.service.OnPreviousFixtureClickListener;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
@@ -32,7 +30,6 @@ import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.teamInfo.ITeamInfoMvpView;
 import yalantis.com.sidemenu.sample.ui.teamInfo.TeamInfoPresenter;
-import yalantis.com.sidemenu.sample.ui.utils.rx.AppSchedulerProvider;
 
 import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 

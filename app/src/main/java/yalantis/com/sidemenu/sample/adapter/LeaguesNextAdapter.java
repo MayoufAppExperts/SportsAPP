@@ -1,4 +1,4 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 /**
  * Created by TheAppExperts on 31/10/2017.

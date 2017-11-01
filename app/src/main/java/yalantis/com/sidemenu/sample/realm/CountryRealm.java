@@ -1,19 +1,20 @@
 package yalantis.com.sidemenu.sample.realm;
 
-public class CountryRealm {
+import io.realm.RealmObject;
+
+public class CountryRealm extends RealmObject{
 
     private String idLeague;
-    private String idSoccerXML;
     private String strLeague;
     private String strBadge;
-    private String strLogo;
 
-    public CountryRealm(String idLeague, String idSoccerXML, String strLeague, String strBadge, String strLogo) {
+    public CountryRealm() {
+    }
+
+    public CountryRealm(String idLeague, String strLeague, String strBadge) {
         this.idLeague = idLeague;
-        this.idSoccerXML = idSoccerXML;
         this.strLeague = strLeague;
         this.strBadge = strBadge;
-        this.strLogo = strLogo;
     }
 
     public String getIdLeague() {
@@ -24,13 +25,6 @@ public class CountryRealm {
         this.idLeague = idLeague;
     }
 
-    public String getIdSoccerXML() {
-        return idSoccerXML;
-    }
-
-    public void setIdSoccerXML(String idSoccerXML) {
-        this.idSoccerXML = idSoccerXML;
-    }
 
     public String getStrLeague() {
         return strLeague;
@@ -48,11 +42,4 @@ public class CountryRealm {
         this.strBadge = strBadge;
     }
 
-    public String getStrLogo() {
-        return strLogo;
-    }
-
-    public void setStrLogo(String strLogo) {
-        this.strLogo = strLogo;
-    }
 }

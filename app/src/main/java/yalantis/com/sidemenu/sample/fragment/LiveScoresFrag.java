@@ -15,12 +15,17 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.livescores.LiveScores;
+import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
+import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.liveScores.ILiveScoresMvpView;
 import yalantis.com.sidemenu.sample.ui.liveScores.LiveScoresPresenter;
+
+import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
 //import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 
@@ -58,14 +63,13 @@ public class LiveScoresFrag extends BaseFragment implements ILiveScoresMvpView {
         Log.d("Class Loaded", "Sports");
         ButterKnife.bind(this, view);
         initialiseRecyclerView(view);
-        //initialiseDagger();
+        initialiseDagger();
 
         viewLiveScoresPresenter.onAttach(this);
         viewLiveScoresPresenter.onViewPrepared();
 
         super.onViewCreated(view, savedInstanceState);
     }
-/*
     private void initialiseDagger() {
         iActivityComponent = DaggerIActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
@@ -73,7 +77,7 @@ public class LiveScoresFrag extends BaseFragment implements ILiveScoresMvpView {
                 .build();
 
         getiActivityComponent().inject(this);
-    }*/
+    }
 
     private void initialiseRecyclerView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);

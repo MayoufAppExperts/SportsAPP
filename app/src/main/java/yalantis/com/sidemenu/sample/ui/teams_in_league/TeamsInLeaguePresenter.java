@@ -1,5 +1,7 @@
 package yalantis.com.sidemenu.sample.ui.teams_in_league;
 
+import javax.inject.Inject;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -13,11 +15,11 @@ import yalantis.com.sidemenu.sample.ui.utils.rx.SchedulerProvider;
  */
 
 public class TeamsInLeaguePresenter
-    <V extends ITeamsInLeagueMvpView>
-    extends BasePresenter<V>
-    implements ITeamsInLeagueMvpPresenter<V>{
+        <V extends ITeamsInLeagueMvpView>
+        extends BasePresenter<V>
+        implements ITeamsInLeagueMvpPresenter<V> {
 
-
+    @Inject
     public TeamsInLeaguePresenter(DataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(dataManager, schedulerProvider, compositeDisposable);
     }

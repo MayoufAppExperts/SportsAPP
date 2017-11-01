@@ -1,7 +1,10 @@
 package yalantis.com.sidemenu.sample.fragment;
 
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,16 +24,28 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmList;
 import me.piruin.quickaction.ActionItem;
 import me.piruin.quickaction.QuickAction;
+import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.adapter.FootballAdapter;
 import yalantis.com.sidemenu.sample.network.model.Country;
 import yalantis.com.sidemenu.sample.network.model.FootballModel;
 import yalantis.com.sidemenu.sample.network.service.OnItemClickListener;
+import yalantis.com.sidemenu.sample.realm.CountryRealm;
+import yalantis.com.sidemenu.sample.realm.FootballModelRealm;
+import yalantis.com.sidemenu.sample.realm.LeaguesRealmAdapter;
+import yalantis.com.sidemenu.sample.realm.RealmController;
+import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
+import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.leagues.ILeaguesMvpView;
 import yalantis.com.sidemenu.sample.ui.leagues.LeaguesPresenter;
+
+import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
 //import yalantis.com.sidemenu.sample.realm.RealmController;
 //import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
@@ -55,8 +70,9 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
     private QuickAction quickAction;
 
-//    Realm realm;
-//    RealmController realmController;
+    Realm realm;
+    RealmController realmController;
+    FootballModelRealm footballModelRealm;
 
 
     public IActivityComponent getiActivityComponent() {
@@ -77,7 +93,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         ButterKnife.bind(this, view);
-        //initialiseRealm();
+        initialiseRealm();
         initialiseRecyclerView(view);
         initialiseDagger();
         quickActionInitialise();
@@ -90,17 +106,23 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
         super.onViewCreated(view, savedInstanceState);
     }
 
-/*    private void initialiseRealm() {
+    private void initialiseRealm() {
         Realm.init(getActivity().getApplicationContext());
-        realm=Realm.getDefaultInstance();
-        realmController=new RealmController(realm);
-    }*/
-/*
-    public boolean isNetworkConnected(){
-        ConnectivityManager connectivityManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        return false;
+        realm = Realm.getDefaultInstance();
+        realmController = new RealmController(realm);
+    }
 
-    }*/
+    public boolean isNetworkConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            Log.i("Connection test", "passed");
+            return true; //we have a connection
+        } else {
+            recyclerView.setAdapter(new LeaguesRealmAdapter(realmController.getLeaguesList(), R.layout.row, getActivity().getApplicationContext()));
+            return false; // no connection!
+        }
+    }
 
     private void quickActionInitialise() {
         QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(), R.color.colorAccent, null));
@@ -108,8 +130,8 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
         ActionItem nextItem = new ActionItem(ID_DOWN, "Teams", R.drawable.icn_1);
         ActionItem prevItem = new ActionItem(ID_UP, "League Info", R.drawable.icn_2);
-        ActionItem fixturesItem = new ActionItem(ID_SEARCH, "Fixtures", R.drawable.icn_3);
-        ActionItem upcomingItem = new ActionItem(ID_INFO, "Results", R.drawable.icn_4);
+        ActionItem fixturesItem = new ActionItem(ID_SEARCH, "Results", R.drawable.icn_3);
+        ActionItem upcomingItem = new ActionItem(ID_INFO, "Fixtures", R.drawable.icn_4);
         prevItem.setSticky(true);
         nextItem.setSticky(true);
         fixturesItem.setSticky(true);
@@ -149,24 +171,40 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
     }
 
-    private void initialiseDagger() {/*
+    private void initialiseDagger() {
         iActivityComponent = DaggerIActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
                 .build();
 
-        getiActivityComponent().inject(this);*/
+        getiActivityComponent().inject(this);
     }
 
     private void initialiseRecyclerView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         Log.d("Recycler View", "Initialised True");
-        //recyclerView.setAdapter(new CakeAdapter(customerModels, R.layout.row, getActivity()));
     }
 
     @Override
     public void onFetchLeagueCompleted(final FootballModel footballModel) {
+
+
+        RealmList<CountryRealm> countriesList = new RealmList<CountryRealm>();
+
+        for (Country country:footballModel.getCountrys()){
+
+            countriesList.add(new CountryRealm(country.getIdLeague(), country.getStrLeague(), country.getStrBadge()));
+
+            footballModelRealm = new FootballModelRealm();
+            footballModelRealm.setCountrys(countriesList);
+            realmController.saveLeagues(footballModelRealm);
+            Log.i("realmSave", "completed");
+
+        }
+
+
+
         recyclerView.setAdapter(new FootballAdapter(footballModel, R.layout.row, getActivity().getApplicationContext(), new OnItemClickListener() {
             @Override
             public void onItemClick(View view, Country country) {
@@ -186,7 +224,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             ft.replace(R.id.content_frame, fr);
                             ft.commit();
                             quickAction.dismiss();
-                        }else if (title == "League Info"){
+                        } else if (title == "League Info") {
                             String cid = country.getIdLeague();
                             Fragment fr = new LeagueInfoFrag();
                             FragmentManager fm = getFragmentManager();
@@ -198,7 +236,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             ft.commit();
                             quickAction.dismiss();
 
-                        }else if (title == "Fixtures"){
+                        } else if (title == "Fixtures") {
                             String cid = country.getIdLeague();
                             Fragment fr = new LeaguePreResultsFrag();
                             FragmentManager fm = getFragmentManager();
@@ -209,7 +247,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             ft.replace(R.id.content_frame, fr);
                             ft.commit();
                             quickAction.dismiss();
-                        }else if (title == "Results"){
+                        } else if (title == "Results") {
                             String cid = country.getIdLeague();
                             Fragment fr = new NextLeagueFixFrag();
                             FragmentManager fm = getFragmentManager();
@@ -220,8 +258,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             ft.replace(R.id.content_frame, fr);
                             ft.commit();
                             quickAction.dismiss();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getActivity(), title + " selected", Toast.LENGTH_SHORT).show();
                             // if (!item.isSticky()) quickAction.remove(item);
                         }

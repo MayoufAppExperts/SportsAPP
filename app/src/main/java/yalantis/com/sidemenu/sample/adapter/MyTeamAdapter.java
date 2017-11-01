@@ -1,4 +1,4 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +21,7 @@ import yalantis.com.sidemenu.sample.network.service.OnTeamInfoClickListener;
  * Created by TheAppExperts on 19/10/2017.
  */
 
-class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.MyTeamViewHolder> {
+public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.MyTeamViewHolder> {
 
     MyTeamModel myTeamModel;
     int row;
@@ -43,7 +43,7 @@ class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.MyTeamViewHolder>
 
     @Override
     public void onBindViewHolder(MyTeamViewHolder holder, int position) {
-        holder.tvName.setText(myTeamModel.getTeams().get(position).getStrTeam());
+        //holder.tvName.setText(myTeamModel.getTeams().get(position).getStrTeam());
 
         Picasso.with(context)
                 .load(myTeamModel.getTeams().get(position).getStrTeamBadge())

@@ -9,6 +9,7 @@ import yalantis.com.sidemenu.sample.fragment.LiveScoresFrag;
 import yalantis.com.sidemenu.sample.fragment.NextLeagueFixFrag;
 import yalantis.com.sidemenu.sample.fragment.PreviousResultFrag;
 import yalantis.com.sidemenu.sample.fragment.TeamInfoFrag;
+import yalantis.com.sidemenu.sample.fragment.TeamsInLeaguesFrag;
 import yalantis.com.sidemenu.sample.fragment.UpcomingEventsFrag;
 import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.sdi.scope.PerActivity;
@@ -29,4 +30,5 @@ public interface IActivityComponent {
     void inject (LeaguePreResultsFrag preResultsFrag);
     void inject (NextLeagueFixFrag nextLeagueFixFrag);
     void inject (DayEventFrag dayEventFrag);
+    void inject (TeamsInLeaguesFrag teamsInLeaguesFrag);
 }

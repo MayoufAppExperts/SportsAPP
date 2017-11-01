@@ -1,4 +1,4 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +21,7 @@ import yalantis.com.sidemenu.sample.network.model.leagueInfo.LeagueInfo;
  * Created by TheAppExperts on 30/10/2017.
  */
 
-class LeagueInfoAdapter extends RecyclerView.Adapter <LeagueInfoAdapter.InfoViewHolder>{
+public class LeagueInfoAdapter extends RecyclerView.Adapter <LeagueInfoAdapter.InfoViewHolder>{
 
 
     LeagueInfo leagueInfo;

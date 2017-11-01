@@ -1,4 +1,4 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +20,7 @@ import yalantis.com.sidemenu.sample.network.model.previousModel.Result;
 import yalantis.com.sidemenu.sample.network.service.OnPreviousFixtureClickListener;
 
 
-class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolder> {
+public class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoViewHolder> {
 
     MyTeamModel myTeamModel;
     int team_info;

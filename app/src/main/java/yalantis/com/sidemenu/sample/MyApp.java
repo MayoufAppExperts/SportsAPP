@@ -3,6 +3,8 @@ package yalantis.com.sidemenu.sample;
 import android.app.Application;
 import android.content.Context;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIApplicationComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IApplicationComponent;
 import yalantis.com.sidemenu.sample.sdi.module.ApplicationModule;
@@ -33,7 +35,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         sApplication = this;
-        //realmCreate();
+
 
         iApplicationComponent = DaggerIApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
@@ -41,18 +43,34 @@ public class MyApp extends Application {
 
         getiApplicationComponent().inject(this);
 
+        realmCreate();
 
 
     }
 
+    /**
+     * TODO
+     * Remove names from club logo - done
+     * USE CALENDAR FOR DATE
+     * DISPLAY THE COMPETITION
+     * PROGRESS DIALOG
+     * CARDVIEW TRANSPARENT - done
+     * faction button for viewing events by day, by default today date loads
+     * replace icons accordingly
+     * add time for fixtures
+     * click on upcoming fixtures and show youtube API
+     *
+     */
 
-//    private void realmCreate() {
-//        Realm.init(getApplicationContext());
-//        RealmConfiguration realmConfiguration =new RealmConfiguration.Builder()
-//                .name(Realm.DEFAULT_REALM_NAME)
-//                .schemaVersion(3)
-//                .deleteRealmIfMigrationNeeded()
-//                .build();
-//
-//        Realm.setDefaultConfiguration(realmConfiguration);
+
+
+    private void realmCreate() {
+        Realm.init(getApplicationContext());
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .name(Realm.DEFAULT_REALM_NAME)
+                .schemaVersion(3)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+    }
 }

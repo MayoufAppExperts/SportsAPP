@@ -1,8 +1,7 @@
-package yalantis.com.sidemenu.sample.fragment;
+package yalantis.com.sidemenu.sample.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,12 +45,22 @@ public class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.Footba
 
     @Override
     public void onBindViewHolder(FootballViewHolder holder, int position) {
-        holder.tvClub.setText(footballModel.getCountrys().get(position).getStrLeague());
+        //holder.tvClub.setText(footballModel.getCountrys().get(position).getStrLeague());
 
-        Picasso.with(context)
-                .load(footballModel.getCountrys().get(position).getStrLogo())
-                .resize(500,250)
-                .into(holder.imgLogo);
+        if (footballModel.getCountrys().get(position).getStrLogo()!=null){
+            //holder.tvClub.setText(footballModel.getCountrys().get(position).getStrLeague());
+            Picasso.with(context)
+                    .load(footballModel.getCountrys().get(position).getStrLogo())
+                    .resize(500,225)
+                    .into(holder.imgLogo);
+        }
+        else {
+            holder.tvClub.setText(footballModel.getCountrys().get(position).getStrLeague());
+            Picasso.with(context)
+                    .load(R.drawable.ic_launcher)
+                    .resize(500,225)
+                    .into(holder.imgLogo);
+        }
 
         holder.bind(footballModel.getCountrys().get(position), onItemClickListener);
     }
@@ -68,12 +77,6 @@ public class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.Footba
         TextView tvClub;
         @BindView(R.id.imageView)
         ImageView imgLogo;
-        @BindView(R.id.leagueInfo)
-        TextView tvLeague;
-        @BindView(R.id.preClick)
-        TextView tvPrevious;
-        @BindView(R.id.fixClick)
-        TextView tvFixtures;
         public FootballViewHolder(View itemView) {
             super(itemView);
 
@@ -82,24 +85,6 @@ public class FootballAdapter extends RecyclerView.Adapter<FootballAdapter.Footba
 
         public void bind(final Country country, final OnItemClickListener onItemClickListener) {
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onItemClickListener.onItemClick(view, country);
-                }
-            });
-            tvLeague.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onItemClickListener.onItemClick(view, country);
-                }
-            });
-            tvPrevious.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onItemClickListener.onItemClick(view, country);
-                }
-            });
-            tvFixtures.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     onItemClickListener.onItemClick(view, country);

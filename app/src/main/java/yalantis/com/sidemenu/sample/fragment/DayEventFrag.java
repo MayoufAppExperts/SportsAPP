@@ -14,12 +14,18 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
+import yalantis.com.sidemenu.sample.adapter.LeaguePreResultsAdapter;
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
+import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
+import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
 import yalantis.com.sidemenu.sample.ui.base.BaseFragment;
 import yalantis.com.sidemenu.sample.ui.dayEvents.DayEventPresenter;
 import yalantis.com.sidemenu.sample.ui.dayEvents.IDayEventMvpView;
+
+import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
 //import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 
@@ -66,13 +72,13 @@ public class DayEventFrag extends BaseFragment implements IDayEventMvpView {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void initialiseDagger() {/*
+    private void initialiseDagger() {
         iActivityComponent = DaggerIActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .iApplicationComponent(((MyApp) getApplication()).getiApplicationComponent())
                 .build();
 
-        getiActivityComponent().inject(this);*/
+        getiActivityComponent().inject(this);
     }
 
     private void initialiseRecyclerView(View view) {
