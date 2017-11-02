@@ -45,8 +45,7 @@ public class LeaguesNextAdapter extends RecyclerView.Adapter <LeaguesNextAdapter
         holder.tvHomeTeam.setText(prev.getStrHomeTeam());
         holder.tvAwayTeam.setText(prev.getStrAwayTeam());
         holder.tvDate.setText(prev.getStrDate());
-        //holder.tvHomeScore.setText(prev.getIntHomeScore());
-        //holder.tvAwayScore.setText(prev.getIntAwayScore());
+        holder.tvTime.setText(prev.getStrTime());
     }
 
     @Override
@@ -62,11 +61,8 @@ public class LeaguesNextAdapter extends RecyclerView.Adapter <LeaguesNextAdapter
         TextView tvAwayTeam;
         @BindView(R.id.fixDate)
         TextView tvDate;
-       /* @BindView(R.id.homeScore)
-        TextView tvHomeScore;
-        @BindView(R.id.awayScore)
-        TextView tvAwayScore;*/
-
+        @BindView(R.id.fixTime)
+        TextView tvTime;
         public InfoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

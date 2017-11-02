@@ -41,8 +41,10 @@ public class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResu
         holder.tvHomeTeam.setText(prev.getStrHomeTeam());
         holder.tvAwayTeam.setText(prev.getStrAwayTeam());
         holder.tvDate.setText(prev.getStrDate());
-        //holder.tvHomeScore.setText(prev.getIntHomeScore());
-        //holder.tvAwayScore.setText(prev.getIntAwayScore());
+        holder.tvHomeScore.setText(prev.getIntHomeScore());
+        holder.tvAwayScore.setText(prev.getIntAwayScore());
+        holder.tvComp.setText(prev.getStrLeague());
+        holder.tvTime.setText(prev.getStrTime());
     }
 
     @Override
@@ -58,10 +60,14 @@ public class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResu
         TextView tvAwayTeam;
         @BindView(R.id.fixDate)
         TextView tvDate;
-       /* @BindView(R.id.homeScore)
+        @BindView(R.id.homeScore)
         TextView tvHomeScore;
         @BindView(R.id.awayScore)
-        TextView tvAwayScore;*/
+        TextView tvAwayScore;
+        @BindView(R.id.compStr)
+        TextView tvComp;
+        @BindView(R.id.fixTime)
+        TextView tvTime;
 
         public InfoViewHolder(View itemView) {
             super(itemView);

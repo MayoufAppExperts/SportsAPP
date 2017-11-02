@@ -52,13 +52,13 @@ public class MyApp extends Application {
      * TODO
      * Remove names from club logo - done
      * USE CALENDAR FOR DATE
-     * DISPLAY THE COMPETITION
+     * DISPLAY THE COMPETITION - DONE
      * PROGRESS DIALOG
      * CARDVIEW TRANSPARENT - done
      * faction button for viewing events by day, by default today date loads
      * replace icons accordingly
-     * add time for fixtures
-     * click on upcoming fixtures and show youtube API
+     * add time for fixtures - done
+     * click on previous fixtures and show youtube API
      *
      */
 

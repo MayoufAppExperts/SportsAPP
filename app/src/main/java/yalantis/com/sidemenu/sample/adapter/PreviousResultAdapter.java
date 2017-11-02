@@ -42,6 +42,8 @@ public class PreviousResultAdapter extends RecyclerView.Adapter<PreviousResultAd
         holder.tvAwayTeam.setText(prev.getStrAwayTeam());
         holder.tvHomeScore.setText(prev.getIntHomeScore());
         holder.tvAwayScore.setText(prev.getIntAwayScore());
+        holder.tvDate.setText(prev.getStrDate());
+        holder.tvTime.setText(prev.getStrTime());
     }
 
     @Override
@@ -59,6 +61,10 @@ public class PreviousResultAdapter extends RecyclerView.Adapter<PreviousResultAd
         TextView tvHomeScore;
         @BindView(R.id.awayScore)
         TextView tvAwayScore;
+        @BindView(R.id.fixDate)
+        TextView tvDate;
+        @BindView(R.id.fixTime)
+        TextView tvTime;
 
         public PreViewHolder(View itemView) {
             super(itemView);

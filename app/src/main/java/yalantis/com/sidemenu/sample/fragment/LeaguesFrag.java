@@ -59,7 +59,6 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
     @BindView(R.id.swipeRefresh)
     SwipeRefreshLayout mySwipeRefreshLayout;
-
     IActivityComponent iActivityComponent;
 
 
@@ -189,10 +188,11 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
     @Override
     public void onFetchLeagueCompleted(final FootballModel footballModel) {
 
-
+        //ProgressBar progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyle);
+        //progressBar.setVisibility(View.VISIBLE);
         RealmList<CountryRealm> countriesList = new RealmList<CountryRealm>();
 
-        for (Country country:footballModel.getCountrys()){
+        for (Country country : footballModel.getCountrys()) {
 
             countriesList.add(new CountryRealm(country.getIdLeague(), country.getStrLeague(), country.getStrBadge()));
 
@@ -202,7 +202,6 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
             Log.i("realmSave", "completed");
 
         }
-
 
 
         recyclerView.setAdapter(new FootballAdapter(footballModel, R.layout.row, getActivity().getApplicationContext(), new OnItemClickListener() {
@@ -235,8 +234,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             ft.replace(R.id.content_frame, fr);
                             ft.commit();
                             quickAction.dismiss();
-
-                        } else if (title == "Fixtures") {
+                        } else if (title == "Results") {
                             String cid = country.getIdLeague();
                             Fragment fr = new LeaguePreResultsFrag();
                             FragmentManager fm = getFragmentManager();
@@ -247,7 +245,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             ft.replace(R.id.content_frame, fr);
                             ft.commit();
                             quickAction.dismiss();
-                        } else if (title == "Results") {
+                        } else if (title == "Fixtures") {
                             String cid = country.getIdLeague();
                             Fragment fr = new NextLeagueFixFrag();
                             FragmentManager fm = getFragmentManager();
@@ -266,6 +264,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                 });
             }
         }));
+        //progressBar.setVisibility(View.GONE);
         Log.i("Fetch", "Completed");
     }
 }

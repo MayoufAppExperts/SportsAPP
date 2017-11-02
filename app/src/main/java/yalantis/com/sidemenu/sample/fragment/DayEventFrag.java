@@ -1,7 +1,11 @@
 package yalantis.com.sidemenu.sample.fragment;
 
+import android.app.DatePickerDialog;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -42,9 +52,14 @@ public class DayEventFrag extends BaseFragment implements IDayEventMvpView {
     @BindView(R.id.swipeRefresh)
     SwipeRefreshLayout mySwipeRefreshLayout;
 
+    @BindView(R.id.dateBtn)
+    Button btnDate;
+    @BindView(R.id.txtDate)
+    TextView tvDate;
+
     IActivityComponent iActivityComponent;
     String d = "";
-
+    Calendar myCalendar = Calendar.getInstance();
     public IActivityComponent getiActivityComponent() {
         return iActivityComponent;
     }
@@ -64,12 +79,47 @@ public class DayEventFrag extends BaseFragment implements IDayEventMvpView {
         initialiseRecyclerView(view);
         initialiseDagger();
         //id = getArguments().getString("id");
+        btnDate.setVisibility(View.VISIBLE);
+        tvDate.setVisibility(View.VISIBLE);
 
-        d = "2017-10-10";
+        d = "2017-10-11";
         dayEventPresenter.onAttach(this);
         dayEventPresenter.onViewPrepared(d);
 
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
+                updateLabel();
+
+            }
+        };
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(getContext(), date,
+                        myCalendar.get(Calendar.YEAR),
+                        myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void updateLabel() {
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
+
+        tvDate.setText(sdf.format(myCalendar.getTime()));
+        d = sdf.format(myCalendar.getTime());
+        Log.i("dcheck", "" + d);
+        dayEventPresenter.onViewPrepared(d);
     }
 
     private void initialiseDagger() {

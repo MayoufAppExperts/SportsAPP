@@ -42,6 +42,7 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
         holder.tvHomeTeam.setText(event.getStrHomeTeam());
         holder.tvAwayTeam.setText(event.getStrAwayTeam());
         holder.tvDate.setText(event.getStrDate());
+        holder.tvTime.setText(event.getStrTime());
 
     }
 
@@ -57,6 +58,8 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
         TextView tvAwayTeam;
         @BindView(R.id.fixDate)
         TextView tvDate;
+        @BindView(R.id.fixTime)
+        TextView tvTime;
 
         public UpViewHolder(View itemView) {
             super(itemView);
