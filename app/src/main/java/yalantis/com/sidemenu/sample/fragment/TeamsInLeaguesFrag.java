@@ -102,7 +102,7 @@ public class TeamsInLeaguesFrag extends BaseFragment  implements ITeamsInLeagueM
 
                     public void myUpdateOperation() {
 
-                        mySwipeRefreshLayout.setRefreshing(true);
+                        mySwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
@@ -132,6 +132,7 @@ public class TeamsInLeaguesFrag extends BaseFragment  implements ITeamsInLeagueM
                 args.putString("id", cid);
                 fr.setArguments(args);
                 ft.replace(R.id.content_frame, fr);
+                ft.addToBackStack(null);
                 ft.commit();
 
             }

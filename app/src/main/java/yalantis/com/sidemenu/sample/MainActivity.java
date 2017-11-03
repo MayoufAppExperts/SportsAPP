@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.BUILDING:
                 Log.d("switch", "second called");
                 fragmentTransaction.replace(R.id.content_frame, new MyTeamFrag())
+                        .addToBackStack(null)
                         .commit();
                 replaceFragment(position);
                 return true;
@@ -193,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.CASE:
                 Log.d("switch", "third called");
                 fragmentTransaction.replace(R.id.content_frame, new LeaguesFrag())
+                        .addToBackStack(null)
                         .commit();
                 replaceFragment(position);
                 return true;
@@ -200,11 +202,13 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
             case ContentFragment.BOOK:
                 Log.d("live", "score");
                 fragmentTransaction.replace(R.id.content_frame, new LiveScoresFrag())
+                        .addToBackStack(null)
                         .commit();
                 replaceFragment(position);
                 return true;
             case ContentFragment.PAINT:
                 fragmentTransaction.replace(R.id.content_frame, new DayEventFrag())
+                        .addToBackStack(null)
                         .commit();
                 replaceFragment(position);
                 return true;

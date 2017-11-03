@@ -90,7 +90,7 @@ public class UpcomingEventsFrag extends BaseFragment implements IUpcomingEventsM
 
                     public void myUpdateOperation() {
 
-                        mySwipeRefreshLayout.setRefreshing(true);
+                        mySwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }

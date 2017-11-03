@@ -91,7 +91,7 @@ public class TeamInfoFrag extends BaseFragment implements ITeamInfoMvpView {
 
                     public void myUpdateOperation() {
 
-                        mySwipeRefreshLayout.setRefreshing(true);
+                        mySwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }

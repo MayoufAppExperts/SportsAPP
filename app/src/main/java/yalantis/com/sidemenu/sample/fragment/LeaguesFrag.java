@@ -159,7 +159,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
 
                     public void myUpdateOperation() {
 
-                        mySwipeRefreshLayout.setRefreshing(true);
+                        mySwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
@@ -221,6 +221,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             args.putString("id", cid);
                             fr.setArguments(args);
                             ft.replace(R.id.content_frame, fr);
+                            ft.addToBackStack(null);
                             ft.commit();
                             quickAction.dismiss();
                         } else if (title == "League Info") {
@@ -232,6 +233,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             args.putString("id", cid);
                             fr.setArguments(args);
                             ft.replace(R.id.content_frame, fr);
+                            ft.addToBackStack(null);
                             ft.commit();
                             quickAction.dismiss();
                         } else if (title == "Results") {
@@ -243,6 +245,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             args.putString("id", cid);
                             fr.setArguments(args);
                             ft.replace(R.id.content_frame, fr);
+                            ft.addToBackStack(null);
                             ft.commit();
                             quickAction.dismiss();
                         } else if (title == "Fixtures") {
@@ -254,6 +257,7 @@ public class LeaguesFrag extends BaseFragment implements ILeaguesMvpView {
                             args.putString("id", cid);
                             fr.setArguments(args);
                             ft.replace(R.id.content_frame, fr);
+                            ft.addToBackStack(null);
                             ft.commit();
                             quickAction.dismiss();
                         } else {

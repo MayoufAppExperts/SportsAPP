@@ -92,7 +92,7 @@ public class PreviousResultFrag extends BaseFragment implements IPreviousResultM
 
                     public void myUpdateOperation() {
 
-                        mySwipeRefreshLayout.setRefreshing(true);
+                        mySwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
