@@ -43,8 +43,6 @@ import yalantis.com.sidemenu.sample.ui.dayEvents.IDayEventMvpView;
 
 import static yalantis.com.sidemenu.sample.MyApp.getApplication;
 
-//import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
-
 /**
  * Created by TheAppExperts on 31/10/2017.
  */
@@ -147,7 +145,7 @@ public class DayEventFrag extends BaseFragment implements IDayEventMvpView {
     public void onFetchDayEventCompleted(LeaguesPrev leaguesPrev) {
         recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext(), new OnDayEventClickListener() {
             @Override
-            public void onItemClick(Event event) {
+            public void onItemClick(View view, Event event) {
                 Toast.makeText(getContext(), "CLICKED!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
                 intent.putExtra(SearchManager.QUERY, event.getStrEvent() + " " + event.getStrDate());

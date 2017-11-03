@@ -1,5 +1,7 @@
 package yalantis.com.sidemenu.sample.network.service;
 
+import android.view.View;
+
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.Event;
 
 /**
@@ -7,5 +9,5 @@ import yalantis.com.sidemenu.sample.network.model.leaguePreResults.Event;
  */
 
 public interface OnDayEventClickListener {
-    void onItemClick(Event event);
+    void onItemClick(View view , Event event);
 }

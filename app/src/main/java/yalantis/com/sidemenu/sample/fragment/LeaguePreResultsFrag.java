@@ -99,7 +99,7 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
 
         recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext(), new OnDayEventClickListener() {
             @Override
-            public void onItemClick(Event event) {
+            public void onItemClick(View view, Event event) {
                 Toast.makeText(getContext(), "CLICKED", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
                 intent.putExtra(SearchManager.QUERY, event.getStrEvent() + " " + event.getStrDate());

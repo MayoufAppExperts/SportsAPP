@@ -83,7 +83,7 @@ public class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResu
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onItemClick(event);
+                    listener.onItemClick(view, event);
                 }
             });
         }

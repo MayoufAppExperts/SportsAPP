@@ -23,7 +23,6 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal"
