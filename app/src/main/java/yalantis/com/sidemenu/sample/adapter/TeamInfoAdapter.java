@@ -173,7 +173,7 @@ public class TeamInfoAdapter extends RecyclerView.Adapter<TeamInfoAdapter.InfoVi
             btnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onItemUpClick(team);
+                    listener.onItemClick(team);
                 }
             });
         }

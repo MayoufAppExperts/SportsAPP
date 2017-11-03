@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.Event;
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
+import yalantis.com.sidemenu.sample.network.service.OnDayEventClickListener;
 
 /**
  * Created by TheAppExperts on 31/10/2017.
@@ -21,11 +22,13 @@ public class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResu
     LeaguesPrev leaguesPrev;
     int live_score;
     Context applicationContext;
+    OnDayEventClickListener listener;
 
-    public LeaguePreResultsAdapter(LeaguesPrev leaguesPrev, int live_score, Context applicationContext) {
+    public LeaguePreResultsAdapter(LeaguesPrev leaguesPrev, int live_score, Context applicationContext, OnDayEventClickListener listener) {
         this.leaguesPrev = leaguesPrev;
         this.live_score = live_score;
         this.applicationContext = applicationContext;
+        this.listener = listener;
 
     }
 
@@ -45,6 +48,8 @@ public class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResu
         holder.tvAwayScore.setText(prev.getIntAwayScore());
         holder.tvComp.setText(prev.getStrLeague());
         holder.tvTime.setText(prev.getStrTime());
+
+        holder.bind(prev, listener);
     }
 
     @Override
@@ -72,6 +77,15 @@ public class LeaguePreResultsAdapter extends RecyclerView.Adapter <LeaguePreResu
         public InfoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        public void bind(final Event event, final OnDayEventClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(event);
+                }
+            });
         }
     }
 }

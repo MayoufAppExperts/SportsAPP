@@ -1,6 +1,9 @@
 package yalantis.com.sidemenu.sample.fragment;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -17,7 +21,9 @@ import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.adapter.LeaguePreResultsAdapter;
+import yalantis.com.sidemenu.sample.network.model.leaguePreResults.Event;
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
+import yalantis.com.sidemenu.sample.network.service.OnDayEventClickListener;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
@@ -91,6 +97,16 @@ public class LeaguePreResultsFrag extends BaseFragment implements IPrevLeagueRes
     @Override
     public void onFetchPrevResultsCompleted(LeaguesPrev leaguesPrev) {
 
-        recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext()));
+        recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext(), new OnDayEventClickListener() {
+            @Override
+            public void onItemClick(Event event) {
+                Toast.makeText(getContext(), "CLICKED", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+                intent.putExtra(SearchManager.QUERY, event.getStrEvent() + " " + event.getStrDate());
+                intent.setPackage("com.google.android.youtube");
+                startActivity(intent);
+
+            }
+        }));
     }
 }

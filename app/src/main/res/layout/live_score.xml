@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Home" />
+                    android:text="@string/home" />
 
                 <TextView
                     android:id="@+id/vsTeam"
@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="V"
+                    android:text="@string/v"
                     android:textSize="14sp" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Away" />
+                    android:text="@string/away" />
             </LinearLayout>
 
 

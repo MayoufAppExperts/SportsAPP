@@ -150,6 +150,7 @@ public class TeamInfoFrag extends BaseFragment implements ITeamInfoMvpView {
                 ft.commit();
 
             }
+
         }));
         Log.i("Fetch", "Completed");
 

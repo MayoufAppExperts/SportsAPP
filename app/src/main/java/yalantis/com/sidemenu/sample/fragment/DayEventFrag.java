@@ -1,9 +1,12 @@
 package yalantis.com.sidemenu.sample.fragment;
 
 import android.app.DatePickerDialog;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -27,7 +31,9 @@ import butterknife.ButterKnife;
 import yalantis.com.sidemenu.sample.MyApp;
 import yalantis.com.sidemenu.sample.R;
 import yalantis.com.sidemenu.sample.adapter.LeaguePreResultsAdapter;
+import yalantis.com.sidemenu.sample.network.model.leaguePreResults.Event;
 import yalantis.com.sidemenu.sample.network.model.leaguePreResults.LeaguesPrev;
+import yalantis.com.sidemenu.sample.network.service.OnDayEventClickListener;
 import yalantis.com.sidemenu.sample.sdi.component.DaggerIActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.component.IActivityComponent;
 import yalantis.com.sidemenu.sample.sdi.module.ActivityModule;
@@ -139,7 +145,17 @@ public class DayEventFrag extends BaseFragment implements IDayEventMvpView {
 
     @Override
     public void onFetchDayEventCompleted(LeaguesPrev leaguesPrev) {
-        recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext()));
+        recyclerView.setAdapter(new LeaguePreResultsAdapter(leaguesPrev, R.layout.live_score, getActivity().getApplicationContext(), new OnDayEventClickListener() {
+            @Override
+            public void onItemClick(Event event) {
+                Toast.makeText(getContext(), "CLICKED!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+                intent.putExtra(SearchManager.QUERY, event.getStrEvent() + " " + event.getStrDate());
+                intent.setPackage("com.google.android.youtube");
+                startActivity(intent);
+
+            }
+        }));
     }
 
     @Override
