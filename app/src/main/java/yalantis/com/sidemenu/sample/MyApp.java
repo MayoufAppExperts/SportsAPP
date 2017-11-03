@@ -51,14 +51,15 @@ public class MyApp extends Application {
     /**
      * TODO
      * Remove names from club logo - done
-     * USE CALENDAR FOR DATE
+     * USE CALENDAR FOR DATE - done
      * DISPLAY THE COMPETITION - DONE
      * PROGRESS DIALOG
      * CARDVIEW TRANSPARENT - done
-     * faction button for viewing events by day, by default today date loads
+     * faction button for viewing events by day, by default today date loads - done
      * replace icons accordingly
      * add time for fixtures - done
-     * click on previous fixtures and show youtube API
+     * click on previous fixtures and show youtube API - done
+     * LOCALE LANG - DONE
      *
      */
 
